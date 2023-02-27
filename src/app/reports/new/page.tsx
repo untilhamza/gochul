@@ -1,19 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Form, Input, Checkbox, Radio } from "antd";
+import { Form, Input, Checkbox, Radio, Row } from "antd";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
-import Button from "@mui/material/Button";
+import { Button, Space, Col } from "antd";
 
 const ReportSubmission: React.FC = () => {
-  const [membersPresent, setMembersPresent] = useState<any>([
-    "Leader's name",
-    "hamza",
-    "Jesus",
-  ]);
-  const [eventsActivities, setEventsActivities] = useState<any>("");
-  const [online, setOnline] = useState<any>(false);
-  const [prayerRequests, setPrayerRequests] = useState<any>("");
+  const [membersPresent, setMembersPresent] = useState<any>([]);
+  const [eventsActivities, setEventsActivities] = useState<string>("");
+  const [online, setOnline] = useState<boolean>(false);
+  const [prayerRequests, setPrayerRequests] = useState<string>("");
 
   const handleMembersPresent = (checkedValues: CheckboxValueType[]) => {
     console.log("checked = ", checkedValues);
@@ -21,9 +17,14 @@ const ReportSubmission: React.FC = () => {
   };
 
   const options = [
-    { label: "Apple", value: "Apple" },
+    { label: "Leader", value: "Leader" },
+    { label: "Apple!!", value: "Apple" },
     { label: "Pear", value: "Pear" },
     { label: "Orange", value: "Orange" },
+    { label: "Banana", value: "Banana" },
+    { label: "Mango", value: "Mango" },
+    { label: "Pineapple", value: "Pineapple" },
+    { label: "Strawberry", value: "Strawberry" },
   ];
 
   const onFinish = (values: any) => {
@@ -32,7 +33,19 @@ const ReportSubmission: React.FC = () => {
 
   return (
     <div>
-      <Form onFinish={onFinish}>
+      <Form
+        onFinish={onFinish}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 16 }}
+        // layout="horizontal"
+        labelAlign="left"
+        style={{
+          maxWidth: 800,
+          margin: "auto",
+          overflow: "hidden",
+          padding: 5,
+        }}
+      >
         <Form.Item
           label="Members Present"
           name="membersPresent"
@@ -44,14 +57,16 @@ const ReportSubmission: React.FC = () => {
           ]}
         >
           <Checkbox.Group
-            options={options}
             onChange={(checkedValues) => setMembersPresent(checkedValues)}
-          />
-          {/* <Checkbox.Group
-            options={options}
-            defaultValue={["Pear"]}
-            onChange={handleMembersPresent}
-          /> */}
+          >
+            <Row justify="start" wrap>
+              {options.map((option) => (
+                <Col span={12} key={option.label}>
+                  <Checkbox value={option.value}>{option.label}</Checkbox>
+                </Col>
+              ))}
+            </Row>
+          </Checkbox.Group>
         </Form.Item>
         <Form.Item
           label="Events/Activities"
@@ -63,9 +78,12 @@ const ReportSubmission: React.FC = () => {
             },
           ]}
         >
-          <Input
+          <Input.TextArea
             value={eventsActivities}
             onChange={(e) => setEventsActivities(e.target.value)}
+            size="large"
+            allowClear
+            autoSize={{ minRows: 3 }}
           />
         </Form.Item>
         <Form.Item
@@ -82,20 +100,37 @@ const ReportSubmission: React.FC = () => {
             value={online}
             onChange={(e) => setOnline(e.target.value === "online")}
           >
-            <Radio value="online">Online</Radio>
-            <Radio value="offline">Offline</Radio>
+            <Row>
+              <Space>
+                <Col span={6}>
+                  <Radio value="online">Online</Radio>
+                </Col>
+                <Col span={6}>
+                  <Radio value="offline">Offline</Radio>
+                </Col>
+              </Space>
+            </Row>
           </Radio.Group>
         </Form.Item>
         <Form.Item label="Prayer Requests" name="prayerRequests">
-          <Input
+          <Input.TextArea
             value={prayerRequests}
             onChange={(e) => setPrayerRequests(e.target.value)}
+            size="large"
+            allowClear
+            bordered
+            autoSize={{ minRows: 3 }}
           />
         </Form.Item>
         <Form.Item>
-          <Button type="submit" variant="outlined">
-            Submit Report
-          </Button>
+          <Space size={"large"} align="end">
+            <Button size="middle" htmlType="submit">
+              Submit Report
+            </Button>
+            <Button size="middle" danger>
+              Cancel
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </div>
