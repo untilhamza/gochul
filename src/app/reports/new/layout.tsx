@@ -19,8 +19,7 @@ export default function Content({ children }: { children: React.ReactNode }) {
       <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
         Submit a new report
       </Typography>
-      {/* {children} */}
-      <ReportSubmission />
+      {children}
     </Paper>
   );
 }
