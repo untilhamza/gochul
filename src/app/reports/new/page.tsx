@@ -1,9 +1,5 @@
 "use client";
-
-import React, { useState } from "react";
-import { Form, Input, Checkbox, Radio, Row } from "antd";
-import type { CheckboxValueType } from "antd/es/checkbox/Group";
-import { Button, Space, Col } from "antd";
+import React, { useState, useRef, useEffect } from "react";
 
 const ReportSubmission: React.FC = () => {
   const [membersPresent, setMembersPresent] = useState<any>([]);
@@ -11,14 +7,22 @@ const ReportSubmission: React.FC = () => {
   const [online, setOnline] = useState<boolean>(false);
   const [prayerRequests, setPrayerRequests] = useState<string>("");
 
-  const handleMembersPresent = (checkedValues: CheckboxValueType[]) => {
+  const handleInputPrayerRequests = (e: any) => {
+    setPrayerRequests(e.target.value);
+  };
+
+  const handleInputEventsActivities = (e: any) => {
+    setEventsActivities(e.target.value);
+  };
+
+  const handleMembersPresent = (checkedValues: any) => {
     console.log("checked = ", checkedValues);
     setMembersPresent(checkedValues);
   };
 
   const options = [
     { label: "Leader", value: "Leader" },
-    { label: "Apple!!", value: "Apple" },
+    { label: "Apple", value: "Apple" },
     { label: "Pear", value: "Pear" },
     { label: "Orange", value: "Orange" },
     { label: "Banana", value: "Banana" },
@@ -32,108 +36,121 @@ const ReportSubmission: React.FC = () => {
   };
 
   return (
-    <div>
-      <Form
-        onFinish={onFinish}
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 16 }}
-        // layout="horizontal"
-        labelAlign="left"
-        style={{
-          maxWidth: 800,
-          margin: "auto",
-          overflow: "hidden",
-          padding: 5,
-        }}
-      >
-        <Form.Item
-          label="Members Present"
-          name="membersPresent"
-          rules={[
-            {
-              required: true,
-              message: "Please input the members present!",
-            },
-          ]}
-        >
-          <Checkbox.Group
-            onChange={(checkedValues) => setMembersPresent(checkedValues)}
+    <form
+      onSubmit={onFinish}
+      className="shadow-md rounded-md max-w-[936px] mx-auto overflow-hidden p-3 bg-white px-6"
+    >
+      <div className="mb-5 items-center md:grid grid-rows-2 md:grid-rows-1 md:grid-cols-8">
+        <div className="col-span-2 text-gray-800 font-semibold">
+          Members Present :
+        </div>
+        <div className="col-span-6 md:grid grid-cols-3 gap-4">
+          {options.map((option) => {
+            return (
+              <div
+                key={option.value}
+                className="md:col-span-1 grid grid-cols-4 p-2 items-center"
+              >
+                <label htmlFor={option.value} className="col-span-2">
+                  {option.label}
+                </label>
+                <input
+                  className="col-span-2"
+                  id={option.value}
+                  type="checkbox"
+                  name={option.value}
+                  value={option.value}
+                  checked={membersPresent.includes(option.value)}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setMembersPresent([...membersPresent, e.target.value]);
+                    } else {
+                      setMembersPresent(
+                        membersPresent.filter(
+                          (member: string) => member !== e.target.value
+                        )
+                      );
+                    }
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="mb-5 items-center md:grid grid-rows-2 md:grid-rows-1 md:grid-cols-8">
+        <label className="md:col-span-2 text-start font-semibold">
+          Events / Activities:
+        </label>
+        <textarea
+          className={`border px-3 py-4 shadow-md rounded-md box-border focus:outline-none focus:outline-blue-300 md:col-span-6 text-sm resize-none w-full md:max-w-[600px]`}
+          placeholder="Events / Activities"
+          onInput={(e) => {
+            //@ts-ignore}
+            setEventsActivities(e.target.value);
+          }}
+          value={eventsActivities}
+        />
+      </div>
+
+      <div className="mb-5 items-center md:grid grid-rows-2 md:grid-rows-1 md:grid-cols-8">
+        <div className="md:col-span-2 text-start font-semibold">Location :</div>
+        <div className="md:col-span-2 flex items-center space-x-2 md:justify-between">
+          <div className="flex items-center space-x-3">
+            <label htmlFor="online">Online</label>
+            <input
+              id="online"
+              type="radio"
+              name="location"
+              value="online"
+              checked={online}
+              onChange={(e) => setOnline(true)}
+            />
+          </div>
+          <div className="flex items-center space-x-3">
+            <label htmlFor="offline">Offline</label>
+            <input
+              id="offline"
+              type="radio"
+              name="location"
+              value="offline"
+              checked={!online}
+              onChange={(e) => setOnline(false)}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-5 items-center md:grid grid-rows-2 md:grid-rows-1 md:grid-cols-8">
+        <label className="md:col-span-2 text-start font-semibold">
+          Prayer Requests:
+        </label>
+        <textarea
+          className={`border px-3 py-4 shadow-md rounded-md box-border focus:outline-none focus:outline-blue-300 md:col-span-6 text-sm resize-none w-full md:max-w-[600px]`}
+          placeholder="Prayer Requests"
+          onInput={handleInputPrayerRequests}
+          value={prayerRequests}
+        />
+      </div>
+
+      <div>
+        <div className="flex p-2 space-x-3 justify-center justify-lg-end">
+          <button
+            type="submit"
+            className="border px-3 py-2 shadow-sm rounded-md bg-blue-500 hover:bg-white text-white hover:text-blue-500 hover:border border-blue-500 font-bold"
           >
-            <Row justify="start" wrap>
-              {options.map((option) => (
-                <Col span={12} key={option.label}>
-                  <Checkbox value={option.value}>{option.label}</Checkbox>
-                </Col>
-              ))}
-            </Row>
-          </Checkbox.Group>
-        </Form.Item>
-        <Form.Item
-          label="Events/Activities"
-          name="eventsActivities"
-          rules={[
-            {
-              required: true,
-              message: "Please input the events or activities!",
-            },
-          ]}
-        >
-          <Input.TextArea
-            value={eventsActivities}
-            onChange={(e) => setEventsActivities(e.target.value)}
-            size="large"
-            allowClear
-            autoSize={{ minRows: 3 }}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Location"
-          name="location"
-          rules={[
-            {
-              required: true,
-              message: "Please choose the location!",
-            },
-          ]}
-        >
-          <Radio.Group
-            value={online}
-            onChange={(e) => setOnline(e.target.value === "online")}
+            Submit
+          </button>
+          <button
+            type="button"
+            className="border px-3 py-2 shadow-sm rounded-md text-red-500 border-red-500 hover:bg-red-500 hover:text-white font-bold"
           >
-            <Row>
-              <Space>
-                <Col span={6}>
-                  <Radio value="online">Online</Radio>
-                </Col>
-                <Col span={6}>
-                  <Radio value="offline">Offline</Radio>
-                </Col>
-              </Space>
-            </Row>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Prayer Requests" name="prayerRequests">
-          <Input.TextArea
-            value={prayerRequests}
-            onChange={(e) => setPrayerRequests(e.target.value)}
-            size="large"
-            allowClear
-            bordered
-            autoSize={{ minRows: 3 }}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Space size={"large"} align="end">
-            <Button size="middle" htmlType="submit">
-              Submit Report
-            </Button>
-            <Button size="middle" danger>
-              Cancel
-            </Button>
-          </Space>
-        </Form.Item>
-      </Form>
-    </div>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 
