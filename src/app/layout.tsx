@@ -1,6 +1,7 @@
+"use client";
 // These styles apply to every route in the application
 import "./globals.css";
-import Paperbase from "../components/Paperbase";
+import MainLayout from "./components/MainLayout";
 
 export default function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{<Paperbase>{children}</Paperbase>}</body>
+      <body>{<MainLayout>{children}</MainLayout>}</body>
     </html>
   );
 }
