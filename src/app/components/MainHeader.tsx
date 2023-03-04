@@ -41,26 +41,13 @@ export default function Header(props: HeaderProps) {
             </Grid>
             <Grid item xs />
             <Grid item>
-              <MuiLink
-                // href="https://www.yoidoenglishministry.org/"
-                variant="body2"
-                sx={{
-                  textDecoration: "none",
-                  color: lightColor,
-                  "&:hover": {
-                    color: "common.white",
-                  },
-                }}
-                rel="noopener noreferrer"
+              <Link
+                href="https://www.yoidoenglishministry.org/"
                 target="_blank"
+                className="text-white hover:text-blue-100"
               >
-                <Link
-                  href="https://www.yoidoenglishministry.org/"
-                  target="_blank"
-                >
-                  Go to YEM
-                </Link>
-              </MuiLink>
+                Go to YEM
+              </Link>
             </Grid>
             <Grid item>
               <Tooltip title="Alerts • No alerts">
@@ -71,13 +58,12 @@ export default function Header(props: HeaderProps) {
             </Grid>
             <Grid item>
               <IconButton color="inherit" sx={{ p: 0.5 }}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
+                <Avatar src="/images/face.png" alt="My Avatar" />
               </IconButton>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
-      <PageHeader pageName="Testing" />
     </React.Fragment>
   );
 }
