@@ -108,11 +108,20 @@ const TopSection = () => {
             />
           </Grid>
           <Grid item>
-            <button className="mr-1 bg-blue-400 text-white px-2 py-1 rounded-md hover:bg-blue-500 active:bg-blue-400">
+            <button
+              className="mr-1 bg-blue-400 text-white px-2 py-1 rounded-md hover:bg-blue-500 active:bg-blue-400"
+              onClick={() => {
+                router.push("/reports/new");
+              }}
+            >
               Add Report
             </button>
             <Tooltip title="Reload">
-              <IconButton onClick={router.reload}>
+              <IconButton
+                onClick={() => {
+                  router.refresh();
+                }}
+              >
                 <RefreshIcon color="inherit" sx={{ display: "block" }} />
               </IconButton>
             </Tooltip>
