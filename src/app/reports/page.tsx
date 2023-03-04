@@ -4,9 +4,7 @@ import { useRouter } from "next/navigation";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
@@ -15,6 +13,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 
 import ReportView from "./[id]/ReportView";
 import { Report } from "../shared/interfaces/reports.interfaces";
+import ReportsList from "./ReportsList";
 
 const SAMPLE_REPORTS: Report[] = [
   {
@@ -45,39 +44,17 @@ const SAMPLE_REPORTS: Report[] = [
   },
 ];
 
-// TODO: this will render a list of reports from the database for a given group
 export default function Page() {
-  // {
-  //   SAMPLE_REPORTS.map((report, index) => {
-  //     return <ReportView key={index} reportData={report} />;
-  //   });
-  // }
-  // return <ReportView reportData={SAMPLE_REPORT} />;
   return (
     <div className="max-w-[936] m-auto overflow-hidden rounded-lg">
       <TopSection />
-      {
-        /* Reports list */
-        SAMPLE_REPORTS.length ? (
-          <div className="flex flex-col gap-4 p-2">
-            {SAMPLE_REPORTS.map((report, index) => {
-              return (
-                <div key={index} className="w-full bg-blue-100 p-3 rounded-md">
-                  {report.submissionDate.toDateString()}
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <Typography
-            sx={{ my: 5, mx: 2 }}
-            color="text.secondary"
-            align="center"
-          >
-            No reports submitted yet
-          </Typography>
-        )
-      }
+      {SAMPLE_REPORTS.length ? (
+        <ReportsList reports={SAMPLE_REPORTS} />
+      ) : (
+        <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
+          No reports submitted yet
+        </Typography>
+      )}
     </div>
   );
 }
