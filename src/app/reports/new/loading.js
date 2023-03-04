@@ -1,7 +1,6 @@
-import React from "react";
+//"use client"
 
-const loading = () => {
-  return <div>loading...</div>;
-};
-
-export default loading;
+export default function Loading() {
+  // Or a custom loading skeleton component
+  return "Loading...";
+}
