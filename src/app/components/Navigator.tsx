@@ -1,4 +1,6 @@
+"use client";
 import * as React from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Divider from "@mui/material/Divider";
 import Drawer, { DrawerProps } from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -9,10 +11,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
-import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
-import PermMediaOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActual";
-import PublicIcon from "@mui/icons-material/Public";
-import SettingsEthernetIcon from "@mui/icons-material/SettingsEthernet";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -24,25 +23,41 @@ const categories = [
     children: [
       {
         id: "Reports",
-        icon: <PeopleIcon />,
+        path: "/reports",
+        icon: <SummarizeIcon />,
         active: true,
       },
-      { id: "Database", icon: <DnsRoundedIcon /> },
-      { id: "Storage", icon: <PermMediaOutlinedIcon /> },
-      { id: "Hosting", icon: <PublicIcon /> },
-      { id: "Functions", icon: <SettingsEthernetIcon /> },
+      { id: "Members", icon: <PeopleIcon />, path: "/members", active: false },
       {
-        id: "Machine learning",
-        icon: <SettingsInputComponentIcon />,
+        id: "Settings",
+        icon: <SettingsIcon />,
+        path: "/settings",
+        active: false,
       },
     ],
   },
   {
     id: "Admin",
     children: [
-      { id: "Analytics", icon: <SettingsIcon /> },
-      { id: "Performance", icon: <TimerIcon /> },
-      { id: "Test Lab", icon: <PhonelinkSetupIcon /> },
+      {
+        id: "Group Reports",
+        icon: <SettingsIcon />,
+        path: "admin/reports",
+        active: false,
+      },
+      {
+        id: "Approvals",
+        icon: <TimerIcon />,
+        path: "admin/approvals",
+        active: false,
+      },
+      {
+        id: "Groups",
+        icon: <SettingsInputComponentIcon />,
+        path: "admin/groups",
+        active: false,
+      },
+      { id: "Setting", icon: <PhonelinkSetupIcon />, path: "admin/settings" },
     ],
   },
 ];
@@ -64,6 +79,8 @@ const itemCategory = {
 
 export default function Navigator(props: DrawerProps) {
   const { ...other } = props;
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -84,9 +101,14 @@ export default function Navigator(props: DrawerProps) {
             <ListItem sx={{ py: 2, px: 3 }}>
               <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
             </ListItem>
-            {children.map(({ id: childId, icon, active }) => (
+            {children.map(({ id: childId, icon, active, path }) => (
               <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
+                {/* TODO: should be active if the path matches its path */}
+                <ListItemButton
+                  selected={pathname === path}
+                  sx={item}
+                  onClick={() => router.push(path)}
+                >
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText>{childId}</ListItemText>
                 </ListItemButton>
