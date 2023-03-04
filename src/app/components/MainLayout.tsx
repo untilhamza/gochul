@@ -58,19 +58,13 @@ export default function MainLayout({
           />
         </Box>
         {/* Main section of page */}
-        <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <div className="flex flex-1 flex-col">
           <Header onDrawerToggle={handleDrawerToggle} />
-          <Box
-            component="main"
-            sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
-          >
-            {children}
-          </Box>
-          {/* Copy right section */}
-          <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
+          {children}
+          <footer className="p-2 bg-sky-100">
             <Copyright />
-          </Box>
-        </Box>
+          </footer>
+        </div>
       </Box>
     </CustomThemeProvider>
   );

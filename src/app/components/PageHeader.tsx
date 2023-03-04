@@ -25,20 +25,14 @@ interface PageLayoutProps {
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({ pageName, children }) => {
-  const [tabValue, setTabValue] = React.useState<string>("new");
+  const [tabValue, setTabValue] = React.useState<string>("reports/new");
   const router = useRouter();
 
   return (
-    <>
+    <div className="sticky top-0">
       <CustomThemeProvider>
         <CssBaseline />
-        <AppBar
-          component="div"
-          color="primary"
-          position="static"
-          elevation={0}
-          sx={{ zIndex: 0 }}
-        >
+        <div className="static z-0 bg-[#009be5] text-white">
           <Toolbar>
             <Grid container alignItems="center" spacing={1}>
               <Grid item xs>
@@ -65,13 +59,8 @@ const PageLayout: React.FC<PageLayoutProps> = ({ pageName, children }) => {
               </Grid>
             </Grid>
           </Toolbar>
-        </AppBar>
-        <AppBar
-          component="div"
-          position="static"
-          elevation={0}
-          sx={{ zIndex: 0 }}
-        >
+        </div>
+        <div className="static z-0 bg-[#009be5] text-white">
           <Tabs
             value={tabValue}
             textColor="inherit"
@@ -86,10 +75,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({ pageName, children }) => {
             {/* <Tab label="Reports Stats" />
             <Tab label="Usage" /> */}
           </Tabs>
-        </AppBar>
+        </div>
         {children}
       </CustomThemeProvider>
-    </>
+    </div>
   );
 };
 
