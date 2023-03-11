@@ -7,7 +7,7 @@ const ReportView: React.FC<{ reportData: Report }> = ({ reportData }) => {
       <h2 className="mx-auto text-gray-800 my-5">Group Activity Report</h2>
       {/* Submission date */}
       <p className="italic">
-        Submitted on: {reportData.submissionDate.toDateString()}
+        Submitted on: {reportData.submissionDate?.toDateString()}
       </p>
       <h3>Leader</h3>
       <p>Angel</p>
