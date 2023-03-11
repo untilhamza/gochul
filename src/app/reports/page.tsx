@@ -10,46 +10,18 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
-
+import { REPORTS } from "@/app/shared/data/reports.data";
 import ReportView from "./[id]/ReportView";
 import { Report } from "../shared/interfaces/reports.interfaces";
 import ReportsList from "./ReportsList";
 
-const SAMPLE_REPORTS: Report[] = [
-  {
-    membersPresent: [
-      { name: "Leader", id: "1" },
-      { name: "Apple", id: "2" },
-      { name: "Pear", id: "3" },
-      { name: "Orange", id: "4" },
-      { name: "Banana", id: "5" },
-    ],
-    eventsActivities: "We had a great time",
-    online: true,
-    prayerRequests: "Pray for my family",
-    submissionDate: new Date(),
-  },
-  {
-    membersPresent: [
-      { name: "Leader", id: "1" },
-      { name: "Apple", id: "2" },
-      { name: "Pear", id: "3" },
-      { name: "Orange", id: "4" },
-      { name: "Banana", id: "5" },
-    ],
-    eventsActivities: "We had a great time",
-    online: true,
-    prayerRequests: "Pray for my family",
-    submissionDate: new Date(),
-  },
-];
-
 export default function Page() {
+  //TODO: fetch reports from the database for given group
   return (
     <div className="max-w-[936] m-auto overflow-hidden rounded-lg">
       <TopSection />
-      {SAMPLE_REPORTS.length ? (
-        <ReportsList reports={SAMPLE_REPORTS} />
+      {REPORTS.length ? (
+        <ReportsList reports={REPORTS} />
       ) : (
         <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
           No reports submitted yet
