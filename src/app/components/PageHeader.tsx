@@ -3,8 +3,7 @@ import * as React from "react";
 import CustomThemeProvider from "./CustomThemeProvider";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
-import Link from "@mui/material/Link";
-import AppBar from "@mui/material/AppBar";
+import { usePathname } from "next/navigation";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -16,17 +15,24 @@ import HelpIcon from "@mui/icons-material/Help";
 import Navigator from "./Navigator";
 import MainHeader from "./MainHeader";
 import { useRouter } from "next/navigation";
+import { PageTab } from "../shared/interfaces/page.interfaces";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
 interface PageLayoutProps {
   pageName: string;
   children?: React.ReactNode;
+  tabs: PageTab[];
 }
 
-const PageLayout: React.FC<PageLayoutProps> = ({ pageName, children }) => {
+const PageHeader: React.FC<PageLayoutProps> = ({
+  pageName,
+  children,
+  tabs,
+}) => {
   const [tabValue, setTabValue] = React.useState<string>("reports/new");
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className="sticky top-0">
@@ -61,20 +67,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ pageName, children }) => {
           </Toolbar>
         </div>
         <div className="static z-0 bg-[#009be5] text-white">
-          <Tabs
-            value={tabValue}
-            textColor="inherit"
-            onChange={(e, value) => {
-              console.log("change", value);
-              setTabValue(value);
-              router.push(`/${value}`);
-            }}
-          >
-            <Tab label="New Report" value="reports/new" />
-            <Tab label="Previous Reports" value="reports" />
-            {/* <Tab label="Reports Stats" />
-            <Tab label="Usage" /> */}
-          </Tabs>
+          <PageTabs tabs={tabs} />
         </div>
         {children}
       </CustomThemeProvider>
@@ -82,4 +75,22 @@ const PageLayout: React.FC<PageLayoutProps> = ({ pageName, children }) => {
   );
 };
 
-export default PageLayout;
+export default PageHeader;
+
+const PageTabs: React.FC<{ tabs: PageTab[] }> = ({ tabs }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  return tabs && tabs.length ? (
+    <Tabs
+      value={pathname}
+      textColor="inherit"
+      onChange={(e, value) => {
+        router.push(`${value}`);
+      }}
+    >
+      {tabs.map((tab, index) => (
+        <Tab label={tab.label} value={tab.path} key={index} />
+      ))}
+    </Tabs>
+  ) : null;
+};
