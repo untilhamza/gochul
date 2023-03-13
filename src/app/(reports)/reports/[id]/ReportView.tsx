@@ -1,7 +1,6 @@
 "use client"; //TODO: will be a server-side component once useParams is implemented in next js 13
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Report, Member } from "@/app/shared/interfaces/reports.interfaces";
 
 const displayDateOptions: any = {
   weekday: "long",
@@ -48,8 +47,8 @@ const ReportView: React.FC<{ reportData: Report }> = ({ reportData }) => {
       {/* member present */}
       <h3>Members Present</h3>
       <ul>
-        {reportData.membersPresent.map((member: Member) => (
-          <li key={member.id}>{member.name}</li>
+        {reportData.membersPresent.map((member: ReportMember) => (
+          <li key={member.id}>{member.firstName}</li>
         ))}
       </ul>
       {/* events / activities */}

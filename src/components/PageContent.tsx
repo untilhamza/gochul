@@ -1,6 +1,5 @@
 import * as React from "react";
 import PageHeader from "@/components/PageHeader";
-import { PageTab } from "@/shared/interfaces/page.interfaces";
 
 export default function PageContent({
   children,
