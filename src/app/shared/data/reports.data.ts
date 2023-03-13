@@ -1,7 +1,16 @@
+const startDate = new Date(2023, 0, 1); // January 1st, 2023
+const endDate = new Date(2023, 3, 31); // March 31st, 2023
+
+function randomDate(start: Date, end: Date) {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
+}
+
 export const REPORTS = [
   {
     id: "1",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: { id: "1", name: "Angel" },
     membersPresent: [
       { id: "1", name: "Angel" },
@@ -14,7 +23,7 @@ export const REPORTS = [
   },
   {
     id: "2",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "4",
       name: "David",
@@ -39,7 +48,7 @@ export const REPORTS = [
   },
   {
     id: "3",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "7",
       name: "Grace",
@@ -64,7 +73,7 @@ export const REPORTS = [
   },
   {
     id: "4",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "10",
       name: "John",
@@ -89,7 +98,7 @@ export const REPORTS = [
   },
   {
     id: "5",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "13",
       name: "Mary",
@@ -114,7 +123,7 @@ export const REPORTS = [
   },
   {
     id: "6",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "16",
       name: "Peter",
@@ -139,7 +148,7 @@ export const REPORTS = [
   },
   {
     id: "7",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "19",
       name: "Sam",
@@ -164,7 +173,7 @@ export const REPORTS = [
   },
   {
     id: "8",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "22",
       name: "Victor",
@@ -189,7 +198,7 @@ export const REPORTS = [
   },
   {
     id: "9",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "25",
       name: "Yara",
@@ -214,7 +223,7 @@ export const REPORTS = [
   },
   {
     id: "10",
-    submissionDate: new Date(),
+    submissionDate: randomDate(startDate, endDate),
     leader: {
       id: "28",
       name: "Ben",
