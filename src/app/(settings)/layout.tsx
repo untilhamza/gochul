@@ -4,11 +4,11 @@ import PageContent from "@/components/PageContent";
 const settingsPageTabs: PageTab[] = [
   {
     label: "Group Settings",
-    path: "/group-settings",
+    path: "group-settings",
   },
   {
     label: "Account Settings",
-    path: "/account-settings",
+    path: "account-settings",
   },
 ];
 

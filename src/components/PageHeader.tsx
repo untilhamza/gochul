@@ -85,7 +85,7 @@ const PageTabs: React.FC<{ tabs: PageTab[] }> = ({ tabs }) => {
       value={pathname}
       textColor="inherit"
       onChange={(e, value) => {
-        router.push(`${value}`);
+        router.push(`/${value}`);
       }}
     >
       {tabs.map((tab, index) => (
