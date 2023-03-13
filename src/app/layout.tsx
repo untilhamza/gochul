@@ -1,6 +1,6 @@
 // These styles apply to every route in the application
 import "./globals.css";
-import MainLayout from "./components/MainLayout";
+import MainLayout from "../components/MainLayout";
 import DefaultTags from "./default-tags";
 
 // export const metadata = {
