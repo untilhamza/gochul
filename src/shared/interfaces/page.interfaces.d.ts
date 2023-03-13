@@ -1,4 +1,4 @@
-export interface PageTab {
+interface PageTab {
   label: string;
   path: string;
 }

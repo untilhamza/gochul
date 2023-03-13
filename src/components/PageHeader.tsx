@@ -15,7 +15,6 @@ import HelpIcon from "@mui/icons-material/Help";
 import Navigator from "./Navigator";
 import MainHeader from "./MainHeader";
 import { useRouter } from "next/navigation";
-import { PageTab } from "../shared/interfaces/page.interfaces";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -30,7 +29,7 @@ const PageHeader: React.FC<PageLayoutProps> = ({
   children,
   tabs,
 }) => {
-  const [tabValue, setTabValue] = React.useState<string>("reports/new");
+  const [tabValue, setTabValue] = React.useState<string>("new-report");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -79,7 +78,8 @@ export default PageHeader;
 
 const PageTabs: React.FC<{ tabs: PageTab[] }> = ({ tabs }) => {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname()?.split("/")[1];
+  console.log("pathname", pathname);
   return tabs && tabs.length ? (
     <Tabs
       value={pathname}

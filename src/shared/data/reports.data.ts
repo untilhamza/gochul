@@ -1,21 +1,12 @@
-const startDate = new Date(2023, 0, 1); // January 1st, 2023
-const endDate = new Date(2023, 3, 31); // March 31st, 2023
-
-function randomDate(start: Date, end: Date) {
-  return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
-  );
-}
-
-export const REPORTS = [
+export const REPORTS: Report[] = [
   {
     id: "1",
-    submissionDate: randomDate(startDate, endDate),
-    leader: { id: "1", name: "Angel" },
+    submissionDate: new Date(2023, 1, 1),
+    leader: { id: "1", firstName: "Angel" },
     membersPresent: [
-      { id: "1", name: "Angel" },
-      { id: "2", name: "Bryan" },
-      { id: "3", name: "Cindy" },
+      { id: "1", firstName: "Angel" },
+      { id: "2", firstName: "Bryan" },
+      { id: "3", firstName: "Cindy" },
     ],
     eventsActivities: "We had a great time!",
     online: true,
@@ -23,23 +14,23 @@ export const REPORTS = [
   },
   {
     id: "2",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 1),
     leader: {
       id: "4",
-      name: "David",
+      firstName: "David",
     },
     membersPresent: [
       {
         id: "4",
-        name: "David",
+        firstName: "David",
       },
       {
         id: "5",
-        name: "Emily",
+        firstName: "Emily",
       },
       {
         id: "6",
-        name: "Frank",
+        firstName: "Frank",
       },
     ],
     eventsActivities: "We had a lot of fun!",
@@ -48,23 +39,23 @@ export const REPORTS = [
   },
   {
     id: "3",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 3, 1),
     leader: {
       id: "7",
-      name: "Grace",
+      firstName: "Grace",
     },
     membersPresent: [
       {
         id: "7",
-        name: "Grace",
+        firstName: "Grace",
       },
       {
         id: "8",
-        name: "Henry",
+        firstName: "Henry",
       },
       {
         id: "9",
-        name: "Isabella",
+        firstName: "Isabella",
       },
     ],
     eventsActivities: "We learned a lot!",
@@ -73,23 +64,23 @@ export const REPORTS = [
   },
   {
     id: "4",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 5),
     leader: {
       id: "10",
-      name: "John",
+      firstName: "John",
     },
     membersPresent: [
       {
         id: "10",
-        name: "John",
+        firstName: "John",
       },
       {
         id: "11",
-        name: "Kate",
+        firstName: "Kate",
       },
       {
         id: "12",
-        name: "Leo",
+        firstName: "Leo",
       },
     ],
     eventsActivities: "We did community service!",
@@ -98,23 +89,23 @@ export const REPORTS = [
   },
   {
     id: "5",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 18),
     leader: {
       id: "13",
-      name: "Mary",
+      firstName: "Mary",
     },
     membersPresent: [
       {
         id: "13",
-        name: "Mary",
+        firstName: "Mary",
       },
       {
         id: "14",
-        name: "Nathan",
+        firstName: "Nathan",
       },
       {
         id: "15",
-        name: "Olivia",
+        firstName: "Olivia",
       },
     ],
     eventsActivities: "We had a party!",
@@ -123,23 +114,23 @@ export const REPORTS = [
   },
   {
     id: "6",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 17),
     leader: {
       id: "16",
-      name: "Peter",
+      firstName: "Peter",
     },
     membersPresent: [
       {
         id: "16",
-        name: "Peter",
+        firstName: "Peter",
       },
       {
         id: "17",
-        name: "Quinn",
+        firstName: "Quinn",
       },
       {
         id: "18",
-        name: "Rachel",
+        firstName: "Rachel",
       },
     ],
     eventsActivities: "We went on a retreat!",
@@ -148,23 +139,23 @@ export const REPORTS = [
   },
   {
     id: "7",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 19),
     leader: {
       id: "19",
-      name: "Sam",
+      firstName: "Sam",
     },
     membersPresent: [
       {
         id: "19",
-        name: "Sam",
+        firstName: "Sam",
       },
       {
         id: "20",
-        name: "Tina",
+        firstName: "Tina",
       },
       {
         id: "21",
-        name: "Uma",
+        firstName: "Uma",
       },
     ],
     eventsActivities: "We had a potluck!",
@@ -173,23 +164,23 @@ export const REPORTS = [
   },
   {
     id: "8",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 20),
     leader: {
       id: "22",
-      name: "Victor",
+      firstName: "Victor",
     },
     membersPresent: [
       {
         id: "22",
-        name: "Victor",
+        firstName: "Victor",
       },
       {
         id: "23",
-        name: "Wendy",
+        firstName: "Wendy",
       },
       {
         id: "24",
-        name: "Xander",
+        firstName: "Xander",
       },
     ],
     eventsActivities: "We went hiking!",
@@ -198,23 +189,23 @@ export const REPORTS = [
   },
   {
     id: "9",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 16),
     leader: {
       id: "25",
-      name: "Yara",
+      firstName: "Yara",
     },
     membersPresent: [
       {
         id: "25",
-        name: "Yara",
+        firstName: "Yara",
       },
       {
         id: "26",
-        name: "Zack",
+        firstName: "Zack",
       },
       {
         id: "27",
-        name: "Alice",
+        firstName: "Alice",
       },
     ],
     eventsActivities: "We watched a movie!",
@@ -223,23 +214,23 @@ export const REPORTS = [
   },
   {
     id: "10",
-    submissionDate: randomDate(startDate, endDate),
+    submissionDate: new Date(2023, 2, 9),
     leader: {
       id: "28",
-      name: "Ben",
+      firstName: "Ben",
     },
     membersPresent: [
       {
         id: "28",
-        name: "Ben",
+        firstName: "Ben",
       },
       {
         id: "29",
-        name: "Carla",
+        firstName: "Carla",
       },
       {
         id: "30",
-        name: "David",
+        firstName: "David",
       },
     ],
     eventsActivities: "We had a game night!",

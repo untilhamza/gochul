@@ -1,0 +1,42 @@
+export const Members: Member[] = [
+  {
+    id: "1",
+    firstName: "Angel",
+    lastName: "A",
+    country: "US",
+    occupation: "Student",
+    groupId: "1",
+  },
+  {
+    id: "2",
+    firstName: "Bryan",
+    lastName: "B",
+    country: "US",
+    occupation: "Student",
+    groupId: "1",
+  },
+  {
+    id: "3",
+    firstName: "Cindy",
+    lastName: "C",
+    country: "US",
+    occupation: "Student",
+    groupId: "1",
+  },
+  {
+    id: "4",
+    firstName: "David",
+    lastName: "D",
+    country: "US",
+    occupation: "Student",
+    groupId: "2",
+  },
+  {
+    id: "5",
+    firstName: "Emily",
+    lastName: "E",
+    country: "US",
+    occupation: "Student",
+    groupId: "2",
+  },
+];
