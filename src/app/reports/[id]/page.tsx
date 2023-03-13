@@ -32,7 +32,7 @@ const SAMPLE_REPORT_DATA: Report = {
 const page = () => {
   // const { id } = useParams<{ id: string }>();
   //TODO: choose the correct report from the list of reports
-  return <ReportView reportData={SAMPLE_REPORT_DATA} />;
+  return <ReportView reportData={SAMPLE_REPORT_DATA} data-superjson />;
 };
 
 export default page;
