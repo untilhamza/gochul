@@ -16,6 +16,7 @@ import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputCompone
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 const categories = [
   {
@@ -31,7 +32,7 @@ const categories = [
       {
         id: "Settings",
         icon: <SettingsIcon />,
-        path: "/settings",
+        path: "/group-settings",
         active: false,
       },
     ],
@@ -41,23 +42,23 @@ const categories = [
     children: [
       {
         id: "Group Reports",
-        icon: <SettingsIcon />,
+        icon: <SummarizeIcon />,
         path: "admin/reports",
         active: false,
       },
       {
         id: "Approvals",
-        icon: <TimerIcon />,
+        icon: <ThumbUpOffAltIcon />,
         path: "admin/approvals",
         active: false,
       },
       {
         id: "Groups",
-        icon: <SettingsInputComponentIcon />,
+        icon: <SettingsIcon />,
         path: "admin/groups",
         active: false,
       },
-      { id: "Setting", icon: <PhonelinkSetupIcon />, path: "admin/settings" },
+      { id: "Setting", icon: <SettingsIcon />, path: "admin-settings" },
     ],
   },
 ];
