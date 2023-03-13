@@ -1,7 +1,8 @@
+import NewMemberForm from "@/components/members/NewMemberForm";
 import React from "react";
 
 const page = () => {
-  return <div>Add a new member</div>;
+  return <NewMemberForm />;
 };
 
 export default page;
