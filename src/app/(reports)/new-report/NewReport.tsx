@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 const SAMPLE_MEMBERS: ReportMember[] = [
