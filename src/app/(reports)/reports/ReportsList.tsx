@@ -1,6 +1,4 @@
 import React from "react";
-
-import { Report } from "../shared/interfaces/reports.interfaces";
 import ReportListItem from "./ReportListItem";
 
 const ReportsList: React.FC<{ reports: Report[] }> = ({ reports }) => {

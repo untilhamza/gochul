@@ -8,12 +8,12 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { REPORTS } from "@/app/shared/data/reports.data";
-import ReportView from "./[id]/ReportView";
-import { Report } from "../shared/interfaces/reports.interfaces";
-import ReportsList from "./ReportsList";
+import { REPORTS } from "@/shared/data/reports.data";
+import ReportView from "../../../components/reports/ReportView";
+import ReportsList from "../../../components/reports/ReportsList";
 
 export default function Page() {
   //TODO: fetch reports from the database for given group
@@ -33,6 +33,7 @@ export default function Page() {
 
 const TopSection = () => {
   const router = useRouter();
+  const [search, setSearch] = useState("");
   return (
     <AppBar
       position="static"
@@ -43,10 +44,10 @@ const TopSection = () => {
       <Toolbar>
         <Grid container spacing={2} alignItems="center">
           <Grid item>
-            <SearchIcon color="inherit" sx={{ display: "block" }} />
+            <FolderOpenIcon color="inherit" sx={{ display: "block" }} />
           </Grid>
           <Grid item xs>
-            <TextField
+            {/* <TextField
               fullWidth
               placeholder="Search reports"
               InputProps={{
@@ -54,14 +55,13 @@ const TopSection = () => {
                 sx: { fontSize: "default" },
               }}
               variant="standard"
-            />
+            /> */}
+            <h2 className="font-bold">Reports</h2>
           </Grid>
           <Grid item>
             <button
-              className="mr-1 bg-blue-400 text-white px-2 py-1 rounded-md hover:bg-blue-500 active:bg-blue-400"
-              onClick={() => {
-                router.push("/reports/new");
-              }}
+              className="ms-1 inline-flex justify-center rounded-md ms-auto bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              onClick={() => router.push("/new-report")}
             >
               Add Report
             </button>

@@ -1,15 +1,14 @@
 import * as React from "react";
-import PageContent from "@/app/components/PageContent";
-import { PageTab } from "@/app/shared/interfaces/page.interfaces";
+import PageContent from "@/components/PageContent";
 
 const reportTabs: PageTab[] = [
   {
     label: "All Reports",
-    path: "/reports",
+    path: "reports",
   },
   {
     label: "New Report",
-    path: "/reports/new",
+    path: "new-report",
   },
 ];
 

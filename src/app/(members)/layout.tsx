@@ -1,15 +1,14 @@
 import React from "react";
-import PageContent from "@/app/components/PageContent";
-import { PageTab } from "../shared/interfaces/page.interfaces";
+import PageContent from "@/components/PageContent";
 
 const membersPageTabs: PageTab[] = [
   {
     label: "All Members",
-    path: "/members",
+    path: "members",
   },
   {
     label: "New Member",
-    path: "/members/new",
+    path: "new-member",
   },
 ];
 

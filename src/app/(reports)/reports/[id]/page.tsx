@@ -1,27 +1,26 @@
 import React from "react";
-import ReportView from "./ReportView";
-import { REPORTS } from "@/app/shared/data/reports.data";
-import { Report } from "@/app/shared/interfaces/reports.interfaces";
+import ReportView from "../../../../components/reports/ReportView";
+import { REPORTS } from "@/shared/data/reports.data";
 
 const SAMPLE_REPORT_DATA: Report = {
   id: "1",
   submissionDate: new Date(),
   leader: {
     id: "1",
-    name: "Angel",
+    firstName: "Angel",
   },
   membersPresent: [
     {
       id: "1",
-      name: "Angel",
+      firstName: "Angel",
     },
     {
       id: "2",
-      name: "Bryan",
+      firstName: "Bryan",
     },
     {
       id: "3",
-      name: "Cindy",
+      firstName: "Cindy",
     },
   ],
   eventsActivities: "We had a great time!",

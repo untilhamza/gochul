@@ -1,6 +1,5 @@
 import * as React from "react";
-import PageContent from "@/app/components/PageContent";
-import { PageTab } from "@/app/shared/interfaces/page.interfaces";
+import PageContent from "@/components/PageContent";
 
 const settingsPageTabs: PageTab[] = [
   {

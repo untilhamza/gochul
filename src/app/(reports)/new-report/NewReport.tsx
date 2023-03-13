@@ -1,16 +1,17 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { Member, Report } from "@/app/shared/interfaces/reports.interfaces";
+import { Inter } from "@next/font/google";
+const inter = Inter({ subsets: ["latin"] });
 
-const SAMPLE_MEMBERS: Member[] = [
-  { name: "Leader", id: "1" },
-  { name: "Apple", id: "2" },
-  { name: "Pear", id: "3" },
-  { name: "Orange", id: "4" },
-  { name: "Banana", id: "5" },
-  { name: "Mango", id: "6" },
-  { name: "Pineapple", id: "7" },
-  { name: "Strawberry", id: "8" },
+const SAMPLE_MEMBERS: ReportMember[] = [
+  { firstName: "Leader", id: "1" },
+  { firstName: "Apple", id: "2" },
+  { firstName: "Pear", id: "3" },
+  { firstName: "Orange", id: "4" },
+  { firstName: "Banana", id: "5" },
+  { firstName: "Mango", id: "6" },
+  { firstName: "Pineapple", id: "7" },
+  { firstName: "Strawberry", id: "8" },
 ];
 
 const DEFAULT_DATA = {
@@ -24,7 +25,7 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
   formData = DEFAULT_DATA,
   isEditing = false,
 }) => {
-  const [membersPresent, setMembersPresent] = useState<Member[]>(
+  const [membersPresent, setMembersPresent] = useState<ReportMember[]>(
     formData.membersPresent
   );
   const [eventsActivities, setEventsActivities] = useState<string>(
@@ -51,7 +52,7 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
   //TODO: use the incoming data instead
   const options = SAMPLE_MEMBERS.map((member) => {
     return {
-      label: member.name,
+      label: member.firstName,
       value: member.id,
     };
   });
@@ -62,7 +63,9 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
 
   return (
     <>
-      <p className="mx-2 text-center text-gray-800 my-5 font-bold text-lg">
+      <p
+        className={`mx-2 text-center text-gray-800 my-5 font-bold text-lg  ${inter.className}`}
+      >
         {isEditing ? "Edit Report" : "Submit a new report"}
       </p>
       <form
@@ -98,12 +101,13 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
                       if (e.target.checked) {
                         setMembersPresent([
                           ...membersPresent,
-                          { id: e.target.value, name: option.label },
+                          { id: e.target.value, firstName: option.label },
                         ]);
                       } else {
                         setMembersPresent(
                           membersPresent.filter(
-                            (member: Member) => member.id !== e.target.value
+                            (member: ReportMember) =>
+                              member.id !== e.target.value
                           )
                         );
                       }
@@ -120,7 +124,7 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
             Events / Activities:
           </label>
           <textarea
-            className={`border px-3 py-4 shadow-md rounded-md box-border focus:outline-none focus:outline-blue-300 md:col-span-6 text-sm resize-none w-full md:max-w-[600px]`}
+            className={`mt-3 border px-3 py-4 shadow-md rounded-md box-border focus:outline-none focus:outline-blue-300 md:col-span-6 text-sm resize-none w-full md:max-w-[600px]`}
             placeholder="Events / Activities"
             onInput={(e) => {
               //@ts-ignore}
@@ -134,7 +138,7 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
           <div className="md:col-span-2 text-start font-semibold">
             Location :
           </div>
-          <div className="md:col-span-2 flex items-center space-x-2 md:justify-between">
+          <div className="mt-3 md:col-span-2 flex items-center space-x-2 md:justify-between">
             <div className="flex items-center space-x-3">
               <label htmlFor="online">Online</label>
               <input
@@ -165,7 +169,7 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
             Prayer Requests:
           </label>
           <textarea
-            className={`border px-3 py-4 shadow-md rounded-md box-border focus:outline-none focus:outline-blue-300 md:col-span-6 text-sm resize-none w-full md:max-w-[600px]`}
+            className={`mt-3 border px-3 py-4 shadow-md rounded-md box-border focus:outline-none focus:outline-blue-300 md:col-span-6 text-sm resize-none w-full md:max-w-[600px]`}
             placeholder="Prayer Requests"
             onInput={handleInputPrayerRequests}
             value={prayerRequests}
