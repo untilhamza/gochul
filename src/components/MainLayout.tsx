@@ -35,6 +35,7 @@ export default function MainLayout({
     setMobileOpen(!mobileOpen);
   };
 
+  // TODO: provide redux here
   return (
     <CustomThemeProvider>
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
