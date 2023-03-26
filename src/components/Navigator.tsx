@@ -32,7 +32,7 @@ const categories = [
       {
         id: "Settings",
         icon: <SettingsIcon />,
-        path: "/group-settings",
+        path: "/account-settings",
         active: false,
       },
     ],

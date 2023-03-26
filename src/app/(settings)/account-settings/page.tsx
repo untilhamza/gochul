@@ -1,7 +1,12 @@
 import React from "react";
+import LeaderForm from "@/components/settings/LeaderForm";
 
-const page = () => {
-  return <div>Personal account settings</div>;
+const Page = () => {
+  return (
+    <>
+      <LeaderForm />
+    </>
+  );
 };
 
-export default page;
+export default Page;
