@@ -13,6 +13,7 @@ import Tabs from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import PageHeader from "./PageHeader";
+import { useSession } from "next-auth/react";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -23,6 +24,9 @@ interface HeaderProps {
 export default function Header(props: HeaderProps) {
   const { onDrawerToggle } = props;
   const [tabValue, setTabValue] = React.useState<number>(0);
+  const { data: session } = useSession();
+
+  const avatarUrl = session?.user?.image || "/images/face.png";
 
   return (
     <React.Fragment>
@@ -58,7 +62,7 @@ export default function Header(props: HeaderProps) {
             </Grid>
             <Grid item>
               <IconButton color="inherit" sx={{ p: 0.5 }}>
-                <Avatar src="/images/face.png" alt="My Avatar" />
+                <Avatar src={avatarUrl} alt="My Avatar" />
               </IconButton>
             </Grid>
           </Grid>
