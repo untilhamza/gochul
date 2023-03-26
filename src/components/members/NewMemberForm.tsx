@@ -144,7 +144,6 @@ const NewMemberForm = () => {
                         (item) => item.value === formik.values.occupation
                       )}
                       onChange={(value) => {
-                        console.log(value);
                         formik.setFieldValue("occupation", value?.value || "");
                       }}
                     />
