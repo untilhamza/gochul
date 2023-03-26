@@ -14,6 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import PageHeader from "./PageHeader";
 import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -64,6 +65,11 @@ export default function Header(props: HeaderProps) {
               <IconButton color="inherit" sx={{ p: 0.5 }}>
                 <Avatar src={avatarUrl} alt="My Avatar" />
               </IconButton>
+            </Grid>
+            <Grid item>
+              <Button color="inherit" onClick={() => signOut()}>
+                Logout
+              </Button>
             </Grid>
           </Grid>
         </Toolbar>
