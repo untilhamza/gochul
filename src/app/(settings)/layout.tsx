@@ -2,10 +2,10 @@ import * as React from "react";
 import PageContent from "@/components/PageContent";
 
 const settingsPageTabs: PageTab[] = [
-  {
-    label: "Group Settings",
-    path: "group-settings",
-  },
+  // {
+  //   label: "Group Settings",
+  //   path: "group-settings",
+  // },
   {
     label: "Account Settings",
     path: "account-settings",
