@@ -8,6 +8,7 @@ import Link from "@mui/material/Link";
 import Navigator from "./Navigator";
 import Header from "./MainHeader";
 import CustomThemeProvider, { theme } from "./CustomThemeProvider";
+import { SessionProvider } from "next-auth/react";
 
 function Copyright() {
   return (
@@ -25,8 +26,10 @@ const drawerWidth = 256;
 
 export default function MainLayout({
   children,
+  session,
 }: {
   children: React.ReactNode;
+  session?: any;
 }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
@@ -37,36 +40,38 @@ export default function MainLayout({
 
   // TODO: provide redux here
   return (
-    <CustomThemeProvider>
-      <Box sx={{ display: "flex", minHeight: "100vh" }}>
-        <CssBaseline />
-        {/* Navigation */}
-        <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
-          {isSmUp ? null : (
+    <SessionProvider session={session}>
+      <CustomThemeProvider>
+        <Box sx={{ display: "flex", minHeight: "100vh" }}>
+          <CssBaseline />
+          {/* Navigation */}
+          <Box
+            component="nav"
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          >
+            {isSmUp ? null : (
+              <Navigator
+                PaperProps={{ style: { width: drawerWidth } }}
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+              />
+            )}
             <Navigator
               PaperProps={{ style: { width: drawerWidth } }}
-              variant="temporary"
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
+              sx={{ display: { sm: "block", xs: "none" } }}
             />
-          )}
-          <Navigator
-            PaperProps={{ style: { width: drawerWidth } }}
-            sx={{ display: { sm: "block", xs: "none" } }}
-          />
+          </Box>
+          {/* Main section of page */}
+          <div className="flex flex-1 flex-col">
+            <Header onDrawerToggle={handleDrawerToggle} />
+            {children}
+            <footer className="p-2 bg-sky-100">
+              <Copyright />
+            </footer>
+          </div>
         </Box>
-        {/* Main section of page */}
-        <div className="flex flex-1 flex-col">
-          <Header onDrawerToggle={handleDrawerToggle} />
-          {children}
-          <footer className="p-2 bg-sky-100">
-            <Copyright />
-          </footer>
-        </div>
-      </Box>
-    </CustomThemeProvider>
+      </CustomThemeProvider>
+    </SessionProvider>
   );
 }

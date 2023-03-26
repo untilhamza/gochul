@@ -7,11 +7,11 @@ import DefaultTags from "./default-tags";
 //   title: "Gochul Portal",
 // };
 
-export default function RootLayout({
-  children,
-}: {
+interface IProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: IProps) {
   return (
     <html lang="en">
       {/*
