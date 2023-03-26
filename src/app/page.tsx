@@ -1,10 +1,20 @@
-import Image from 'next/image'
-import { Inter } from "next/font/google"
-import styles from './page.module.css'
+"use client";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "./page.module.css";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
+//TODO: make this a sign in page the redirects if the user is already logged in .
 export default function Home() {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    console.log("session", session);
+  }, [session]);
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -18,7 +28,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
+            By{" "}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -87,5 +97,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }
