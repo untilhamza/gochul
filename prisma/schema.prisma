@@ -49,16 +49,27 @@ model User {
   lastName      String?
   email         String?   @unique
   emailVerified DateTime?
-  country       String?
-  occupation    String?
   locale        String?
   picture         String?
-  role         Role      @default(USER)
-  isApproved    Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
 }
 
+// model GochulUser {
+//     id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name          String?
+//   firstName     String?
+//   lastName      String?
+//   email         String?   @unique
+//   country       String?
+//   occupation    String?
+//   locale        String?
+//   picture         String?
+//   role         Role      @default(USER)
+//   isApproved    Boolean   @default(false)
+//   accounts      Account[]
+//   sessions      Session[]
+// }
 
 model VerificationToken {
   id String @id @default(auto()) @map("_id") @db.ObjectId
