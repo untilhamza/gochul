@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// model User {
+//   id         String @id @default(auto()) @map("_id") @db.ObjectId
+//   country    String
+//   firstName  String
+//   groupId    String
+//   lastName   String
+//   occupation String
+// }
+
+model Account {
+   id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String @db.ObjectId
+  type               String
+  provider       String
+  providerAccountId  String
+    scope              String?
+   expires_at         Int?
+    token_type         String?
+  refresh_token       String?  @db.String
+  access_token        String?  @db.String
+  id_token            String?  @db.String
+  session_state       String?
+  user               User      @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String @db.ObjectId
+  expires      DateTime
+  sessionToken String   @unique
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  firstName     String?
+  lastName      String?
+  email         String?   @unique
+  emailVerified DateTime?
+  locale        String?
+  picture         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+// model GochulUser {
+//     id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name          String?
+//   firstName     String?
+//   lastName      String?
+//   email         String?   @unique
+//   country       String?
+//   occupation    String?
+//   locale        String?
+//   picture         String?
+//   role         Role      @default(USER)
+//   isApproved    Boolean   @default(false)
+//   accounts      Account[]
+//   sessions      Session[]
+// }
+
+model VerificationToken {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// model Group {
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name String
+//   users User[]
+// }
+
+enum Role {
+  ADMIN
+  LEADER
+  USER
+}
