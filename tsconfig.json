@@ -29,7 +29,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(members)/members/members"
+    "src/app/leader/(members)/members/members"
   ],
   "exclude": ["node_modules"]
 }

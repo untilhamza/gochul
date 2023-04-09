@@ -5,22 +5,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import Navigator from "./Navigator";
+import Navigator from "./nav/Navigator";
 import Header from "./MainHeader";
 import CustomThemeProvider, { theme } from "./CustomThemeProvider";
 import { SessionProvider } from "next-auth/react";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        Gochul Portal
-      </Link>{" "}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
+import Navbar from "./nav/Navbar";
+import Copyright from "./Copyright";
+import MainSection from "./MainSection";
 
 const drawerWidth = 256;
 
@@ -45,31 +36,11 @@ export default function MainLayout({
         <Box sx={{ display: "flex", minHeight: "100vh" }}>
           <CssBaseline />
           {/* Navigation */}
-          <Box
-            component="nav"
-            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          >
-            {isSmUp ? null : (
-              <Navigator
-                PaperProps={{ style: { width: drawerWidth } }}
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-              />
-            )}
-            <Navigator
-              PaperProps={{ style: { width: drawerWidth } }}
-              sx={{ display: { sm: "block", xs: "none" } }}
-            />
-          </Box>
+          <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
           {/* Main section of page */}
-          <div className="flex flex-1 flex-col">
-            <Header onDrawerToggle={handleDrawerToggle} />
+          <MainSection handleDrawerToggle={handleDrawerToggle}>
             {children}
-            <footer className="p-2 bg-sky-100">
-              <Copyright />
-            </footer>
-          </div>
+          </MainSection>
         </Box>
       </CustomThemeProvider>
     </SessionProvider>

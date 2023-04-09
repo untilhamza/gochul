@@ -4,11 +4,11 @@ import PageContent from "@/components/PageContent";
 const membersPageTabs: PageTab[] = [
   {
     label: "All Members",
-    path: "members",
+    path: "leader/members",
   },
   {
     label: "New Member",
-    path: "new-member",
+    path: "leader/new-member",
   },
 ];
 
