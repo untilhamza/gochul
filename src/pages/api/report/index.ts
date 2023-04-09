@@ -4,19 +4,19 @@ import prisma from "../../../lib/prisma";
 // POST /api/post
 // Required fields in body: title, authorEmail
 // Optional fields in body: content
-export default async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  return res.status(200).json({ message: "Not implemented" });
+// export default async function handle(
+//   req: NextApiRequest,
+//   res: NextApiResponse
+// ) {
+//   return res.status(200).json({ message: "Not implemented" });
 
-  const { title, content, authorEmail } = req.body;
-  const result = await prisma.post.create({
-    data: {
-      title: title,
-      content: content,
-      author: { connect: { email: authorEmail } },
-    },
-  });
-  return res.status(201).json(result);
-}
+//   const { title, content, authorEmail } = req.body;
+//   const result = await prisma.post.create({
+//     data: {
+//       title: title,
+//       content: content,
+//       author: { connect: { email: authorEmail } },
+//     },
+//   });
+//   return res.status(201).json(result);
+// }

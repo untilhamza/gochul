@@ -12,8 +12,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import HelpIcon from "@mui/icons-material/Help";
-import Navigator from "./Navigator";
-import MainHeader from "./MainHeader";
 import { useRouter } from "next/navigation";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";

@@ -24,15 +24,20 @@ const categories = [
     children: [
       {
         id: "Reports",
-        path: "/reports",
+        path: "/leader/reports",
         icon: <SummarizeIcon />,
         active: true,
       },
-      { id: "Members", icon: <PeopleIcon />, path: "/members", active: false },
+      {
+        id: "Members",
+        icon: <PeopleIcon />,
+        path: "/leader/members",
+        active: false,
+      },
       {
         id: "Settings",
         icon: <SettingsIcon />,
-        path: "/account-settings",
+        path: "/leader/account-settings",
         active: false,
       },
     ],

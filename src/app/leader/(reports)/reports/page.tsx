@@ -12,8 +12,8 @@ import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { REPORTS } from "@/shared/data/reports.data";
-import ReportView from "../../../components/reports/ReportView";
-import ReportsList from "../../../components/reports/ReportsList";
+import ReportView from "../../../../components/reports/ReportView";
+import ReportsList from "../../../../components/reports/ReportsList";
 
 export default function Page() {
   //TODO: fetch reports from the database for given group
@@ -61,7 +61,7 @@ const TopSection = () => {
           <Grid item>
             <button
               className="ms-1 inline-flex justify-center rounded-md ms-auto bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              onClick={() => router.push("/new-report")}
+              onClick={() => router.push("leader/new-report")}
             >
               Add Report
             </button>

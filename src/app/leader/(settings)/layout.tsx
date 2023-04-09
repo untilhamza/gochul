@@ -8,7 +8,7 @@ const settingsPageTabs: PageTab[] = [
   // },
   {
     label: "Account Settings",
-    path: "account-settings",
+    path: "leader/account-settings",
   },
 ];
 

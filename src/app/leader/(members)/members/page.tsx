@@ -11,7 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import MemberList from "../../../components/members/MemberList";
+import MemberList from "../../../../components/members/MemberList";
 import { useRouter } from "next/navigation";
 
 const MembersPage = () => {
@@ -46,7 +46,7 @@ const MembersPage = () => {
             <Grid item>
               <button
                 className="ms-1 inline-flex justify-center rounded-md ms-auto bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                onClick={() => router.push("/new-member")}
+                onClick={() => router.push("leader/new-member")}
               >
                 Add Member
               </button>

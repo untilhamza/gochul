@@ -17,14 +17,14 @@ datasource db {
 // }
 
 model Account {
-   id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId             String @db.ObjectId
   type               String
   provider       String
   providerAccountId  String
-    scope              String?
-   expires_at         Int?
-    token_type         String?
+  scope              String?
+  expires_at         Int?
+  token_type         String?
   refresh_token       String?  @db.String
   access_token        String?  @db.String
   id_token            String?  @db.String
@@ -50,7 +50,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   locale        String?
-  picture         String?
+  image         String?
   accounts      Account[]
   sessions      Session[]
 }

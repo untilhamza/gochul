@@ -4,11 +4,11 @@ import PageContent from "@/components/PageContent";
 const reportTabs: PageTab[] = [
   {
     label: "All Reports",
-    path: "reports",
+    path: "leader/reports",
   },
   {
     label: "New Report",
-    path: "new-report",
+    path: "leader/new-report",
   },
 ];
 

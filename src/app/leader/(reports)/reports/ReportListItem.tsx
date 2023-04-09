@@ -9,7 +9,7 @@ const ReportListItem: React.FC<{ submissionDate: Date; reportId: string }> = ({
   return (
     <div
       className="w-full bg-blue-200 p-3 rounded-md hover:bg-blue-200/75 text-gray-800"
-      onClick={() => router.push(`reports/${reportId}`)}
+      onClick={() => router.push(`leader/reports/${reportId}`)}
     >
       {submissionDate.toDateString()}
     </div>
