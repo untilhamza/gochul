@@ -83,11 +83,12 @@ export const authOptions: NextAuthOptions = {
         }
         session.user = {
           ...session.user,
+          //@ts-ignore
           role: gochulUser?.role,
           firstName: gochulUser?.firstName,
           lastName: gochulUser?.lastName,
           picture: gochulUser?.picture,
-        } as any;
+        };
       }
       return session;
     },
