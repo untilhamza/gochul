@@ -23,7 +23,7 @@ interface HeaderProps {
   onDrawerToggle: () => void;
 }
 
-export default function Header(props: HeaderProps) {
+export default function MainHeader(props: HeaderProps) {
   const { onDrawerToggle } = props;
   const [tabValue, setTabValue] = React.useState<number>(0);
   const { data: session } = useSession();
@@ -39,7 +39,9 @@ export default function Header(props: HeaderProps) {
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={onDrawerToggle}
+                onClick={() => {
+                  onDrawerToggle();
+                }}
                 edge="start"
               >
                 <MenuIcon />
