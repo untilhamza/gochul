@@ -1,5 +1,5 @@
 import React from "react";
-import ReportView from "../../../../components/reports/ReportView";
+import ReportView from "../../../../../components/reports/ReportView";
 import { REPORTS } from "@/shared/data/reports.data";
 
 const SAMPLE_REPORT_DATA: Report = {
