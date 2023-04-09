@@ -12,7 +12,7 @@ export default function Home() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    console.log("session", session);
+    console.log("main layout session", session);
   }, [session]);
 
   return (
