@@ -13,7 +13,7 @@ const ReportListItem: React.FC<{ submissionDate: Date; reportId: string }> = ({
     <li key={reportId} className="p-2 mb-1 items-center  hover:bg-gray-100">
       <div
         className="cursor-pointer flex items-center p-2 rounded-md"
-        onClick={() => router.push(`reports/${reportId}`)}
+        onClick={() => router.push(`leader/reports/${reportId}`)}
       >
         <span className="flex-1">
           {" "}
