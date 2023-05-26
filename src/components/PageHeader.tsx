@@ -76,8 +76,7 @@ export default PageHeader;
 
 const PageTabs: React.FC<{ tabs: PageTab[] }> = ({ tabs }) => {
   const router = useRouter();
-  const pathname = usePathname()?.split("/")[1];
-  console.log("pathname", pathname);
+  const pathname = usePathname()?.slice(1);
   return tabs && tabs.length ? (
     <Tabs
       value={pathname}
