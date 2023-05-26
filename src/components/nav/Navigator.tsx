@@ -13,6 +13,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
+import GroupsIcon from "@mui/icons-material/Groups";
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
@@ -35,9 +36,15 @@ const categories = [
         active: false,
       },
       {
-        id: "Settings",
+        id: "Group Settings",
+        icon: <GroupsIcon />,
+        path: "/leader/group",
+        active: false,
+      },
+      {
+        id: "Account Settings",
         icon: <SettingsIcon />,
-        path: "/leader/account-settings",
+        path: "/leader/account",
         active: false,
       },
     ],
