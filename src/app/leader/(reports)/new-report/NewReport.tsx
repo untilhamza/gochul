@@ -57,8 +57,9 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
     };
   });
 
-  const onFinish = (values: any) => {
-    console.log("Report submitted: ", values);
+  const onFinish = (event: any) => {
+    event.preventDefault();
+    console.log("Report submitted: ", {});
   };
 
   return (
