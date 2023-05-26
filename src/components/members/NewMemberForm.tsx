@@ -20,6 +20,7 @@ const NewMemberForm = () => {
     () => [
       { value: "student", label: "Student" },
       { value: "working", label: "Working Professional" },
+      { value: "family", label: "Family" },
     ],
     []
   );
