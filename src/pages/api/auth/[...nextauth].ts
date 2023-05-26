@@ -42,8 +42,8 @@ export const authOptions: NextAuthOptions = {
             firstName: firstName!,
             lastName: lastName!,
             email: userEmail!,
-            country: "", //TODO: get this from google util
-            occupation: "",
+            country: "", //TODO: get this from google util, or leader can set it
+            occupation: "", //TODO: leader will set this
             isApproved: false,
             role: "USER",
             locale: locale!,
