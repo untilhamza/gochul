@@ -1,5 +1,6 @@
 import prisma from ".";
 import { GochulUser } from "@prisma/client";
+
 export const getGochulUserByEmail = async (email: string) => {
   try {
     const userFromDb = await prisma.gochulUser.findUnique({ where: { email } });
