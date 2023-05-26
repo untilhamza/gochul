@@ -5,7 +5,6 @@ import MainHeader from "./MainHeader";
 import CustomThemeProvider, { theme } from "./CustomThemeProvider";
 import { SessionProvider } from "next-auth/react";
 import Navbar from "./nav/Navbar";
-import Copyright from "./Copyright";
 import { useSession } from "next-auth/react";
 
 interface Iprops {
@@ -27,9 +26,6 @@ const MainSection = ({ children, handleDrawerToggle }: Iprops) => {
     <div className="flex flex-1 flex-col">
       <MainHeader onDrawerToggle={handleDrawerToggle} />
       {children}
-      <footer className="p-2 bg-sky-100">
-        <Copyright />
-      </footer>
     </div>
   );
 };
