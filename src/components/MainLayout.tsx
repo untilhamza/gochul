@@ -33,7 +33,15 @@ export default function MainLayout({
   return (
     <SessionProvider session={session}>
       <CustomThemeProvider>
-        <Box sx={{ display: "flex", minHeight: "100vh" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            minHeight: "100vh",
+            marginLeft: { sm: `${drawerWidth}px` },
+          }}
+        >
           <CssBaseline />
           {/* Navigation */}
           <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
@@ -41,6 +49,10 @@ export default function MainLayout({
           <MainSection handleDrawerToggle={handleDrawerToggle}>
             {children}
           </MainSection>
+          {/* Footer */}
+          <footer className="p-2 bg-sky-100">
+            <Copyright />
+          </footer>
         </Box>
       </CustomThemeProvider>
     </SessionProvider>
