@@ -6,10 +6,3 @@ interface Member {
   id: string;
   groupId: string;
 }
-
-interface GroupLeader extends Member {
-  isGroupLeader: boolean;
-  phone: string;
-  email: string;
-  birthDate: string;
-}
