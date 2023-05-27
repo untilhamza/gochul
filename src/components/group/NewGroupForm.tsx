@@ -4,6 +4,7 @@ import Select from "react-select";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
+import { Group_District } from "@prisma/client";
 
 const FormSchema = yup.object().shape({
   district: yup.string().required("* District is required"),
@@ -13,23 +14,48 @@ const NewGroupForm = () => {
   const router = useRouter();
   const districtOptions = useMemo(
     () => [
-      { value: "college", label: "College" },
-      { value: "working", label: "Working Professional" },
-      { value: "family", label: "Family" },
+      { value: Group_District.COLLEGE, label: "College" },
+      {
+        value: Group_District.WORKING_PROFESSIONAL,
+        label: "Working Professional",
+      },
+      { value: Group_District.FAMILY, label: "Family" },
     ],
     []
   );
+
   const formik = useFormik({
     initialValues: {
       district: "",
     },
     validationSchema: FormSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
       //reset form
-      formik.resetForm();
+      await handleGroupCreation();
     },
   });
+
+  const handleGroupCreation = async () => {
+    const payload = {
+      district: formik.values.district,
+    };
+    try {
+      const response = await fetch("/api/group/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      formik.resetForm();
+      if (response.ok) {
+        router.push("/leader/group");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="mt-10 sm:mt-0 ">
       <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -61,9 +87,11 @@ const NewGroupForm = () => {
                       name="district"
                       options={districtOptions}
                       instanceId="react-select-3-live-region"
-                      value={districtOptions.find(
-                        (item) => item.value === formik.values.district
-                      )}
+                      value={
+                        districtOptions.find(
+                          (item) => item.value === formik.values.district
+                        ) || null
+                      }
                       onChange={(value) => {
                         formik.setFieldValue("district", value?.value || "");
                       }}
