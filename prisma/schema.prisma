@@ -7,43 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model User {
-//   id         String @id @default(auto()) @map("_id") @db.ObjectId
-//   country    String
-//   firstName  String
-//   groupId    String
-//   lastName   String
-//   occupation String
-// }
-
 model Account {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String @db.ObjectId
-  type               String
-  provider       String
-  providerAccountId  String
-  scope              String?
-  expires_at         Int?
-  token_type         String?
-  refresh_token       String?  @db.String
-  access_token        String?  @db.String
-  id_token            String?  @db.String
-  session_state       String?
-  user               User      @relation(fields: [userId], references: [id])
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  scope             String?
+  expires_at        Int?
+  token_type        String?
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  id_token          String? @db.String
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId       String @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @db.ObjectId
   expires      DateTime
   sessionToken String   @unique
   user         User     @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   firstName     String?
   lastName      String?
@@ -55,22 +46,25 @@ model User {
   sessions      Session[]
 }
 
+// a leader or an admin that signs in / sign up to use this app
 model GochulUser {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  firstName     String?
-  lastName      String?
-  email         String?   @unique
-  country       String?
-  occupation    String?
-  locale        String?
-  picture         String?
-  role         Role      @default(USER)
-  isApproved    Boolean   @default(false)
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String?
+  firstName  String?
+  lastName   String?
+  email      String?  @unique
+  country    String?
+  occupation String?
+  locale     String?
+  picture    String?
+  role       Role     @default(USER)
+  isApproved Boolean  @default(false)
+  Group      Group[]
+  Report     Report[]
 }
 
 model VerificationToken {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String   @unique
   expires    DateTime
@@ -78,14 +72,62 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// model Group {
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   name String
-//   users User[]
-// }
+// the group lead by a leader
+// each group has a leader
+// each group belongs to a district
+model Group {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  districtId String     @db.ObjectId
+  leaderId   String     @db.ObjectId
+  district   District   @relation(fields: [districtId], references: [id])
+  leader     GochulUser @relation(fields: [leaderId], references: [id])
+  Member     Member[]
+  Report     Report[]
+}
 
+// each group belong to a district 
+model District {
+  id    String         @id @default(auto()) @map("_id") @db.ObjectId
+  name  Group_District @unique
+  Group Group[]
+}
+
+// a member of a group is not really a signed in user
+model Member {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  firstName  String
+  lastName   String?
+  country    String?
+  occupation String?
+  groupId    String  @db.ObjectId
+  Group      Group   @relation(fields: [groupId], references: [id])
+  Report     Report? @relation(fields: [reportId], references: [id])
+  reportId   String? @db.ObjectId
+}
+
+model Report {
+  id               String     @id @default(auto()) @map("_id") @db.ObjectId
+  groupId          String     @db.ObjectId
+  leaderId         String     @db.ObjectId
+  membersPresent   Member[]
+  eventsActivities String
+  online           Boolean
+  prayerRequests   String
+  submissionDate   DateTime
+  Group            Group      @relation(fields: [groupId], references: [id])
+  leader           GochulUser @relation(fields: [leaderId], references: [id])
+}
+
+// possible roles for users
 enum Role {
   ADMIN
   LEADER
   USER
+}
+
+// possible group districts
+enum Group_District {
+  FAMILY
+  COLLEGE
+  WORKING_PROFESSIONAL
 }
