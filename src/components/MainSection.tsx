@@ -2,10 +2,9 @@
 import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MainHeader from "./MainHeader";
-import CustomThemeProvider, { theme } from "./CustomThemeProvider";
-import { SessionProvider } from "next-auth/react";
-import Navbar from "./nav/Navbar";
+import { theme } from "./CustomThemeProvider";
 import { useSession } from "next-auth/react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface Iprops {
   children: React.ReactNode;
@@ -15,17 +14,19 @@ interface Iprops {
 const MainSection = ({ children, handleDrawerToggle }: Iprops) => {
   const [mobileOpen, setMobileOpen] = React.useState(true);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
-
-  // const handleDrawerToggle = () => {
-  //   setMobileOpen(!mobileOpen);
-  // };
-
-  //@ts-ignore
+  const { data: session, status } = useSession();
 
   return (
     <div className="flex flex-1 flex-col">
       <MainHeader onDrawerToggle={handleDrawerToggle} />
-      {children}
+
+      {status === "loading" ? (
+        <div className="flex items-center justify-center w-full h-full">
+          <CircularProgress />
+        </div>
+      ) : (
+        children
+      )}
     </div>
   );
 };
