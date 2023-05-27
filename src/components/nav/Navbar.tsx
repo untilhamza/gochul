@@ -14,7 +14,6 @@ interface Iprops {
 }
 
 const Navbar = ({ mobileOpen, setMobileOpen }: Iprops) => {
-  // const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
   const { data: session, status } = useSession();
 
@@ -22,15 +21,13 @@ const Navbar = ({ mobileOpen, setMobileOpen }: Iprops) => {
     setMobileOpen(!mobileOpen);
   };
 
-  if (!session || !session.user) return null;
-
-  //@ts-ignore
-  if (session.user?.role === "USER") return null;
-
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
+      sx={{
+        width: { sm: DRAWER_WIDTH },
+        flexShrink: { sm: 0 },
+      }}
     >
       {isSmUp ? null : (
         <Navigator

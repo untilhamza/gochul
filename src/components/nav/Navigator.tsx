@@ -9,19 +9,46 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import SummarizeIcon from "@mui/icons-material/Summarize";
-import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
 import GroupsIcon from "@mui/icons-material/Groups";
-import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
-import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import { useSession } from "next-auth/react";
+import Skeleton from "@mui/material/Skeleton";
 
 const categories = [
   {
     id: "Leader",
+    children: [
+      {
+        id: "Reports",
+        path: "/leader/reports",
+        icon: <SummarizeIcon />,
+        active: true,
+      },
+      {
+        id: "Members",
+        icon: <PeopleIcon />,
+        path: "/leader/members",
+        active: false,
+      },
+      {
+        id: "Group Settings",
+        icon: <GroupsIcon />,
+        path: "/leader/group",
+        active: false,
+      },
+      {
+        id: "Account Settings",
+        icon: <SettingsIcon />,
+        path: "/leader/account",
+        active: false,
+      },
+    ],
+  },
+  {
+    id: "User",
     children: [
       {
         id: "Reports",
@@ -94,6 +121,18 @@ export default function Navigator(props: DrawerProps) {
   const { ...other } = props;
   const router = useRouter();
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+
+  // if (!session || !session.user) return null;
+
+  // //@ts-ignore
+  // if (session.user?.role === "USER") return null;
+
+  //if (status === "loading") return <div>Loading ...</div>;
+
+  React.useEffect(() => {
+    console.log("session", session);
+  }, [session]);
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -103,33 +142,96 @@ export default function Navigator(props: DrawerProps) {
         >
           Gochul
         </ListItem>
-        <ListItem sx={{ ...item, ...itemCategory }}>
+        {/* <ListItem sx={{ ...item, ...itemCategory }}>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText>Dashboard</ListItemText>
-        </ListItem>
-        {categories.map(({ id, children }) => (
-          <Box key={id} sx={{ bgcolor: "#101F33" }}>
-            <ListItem sx={{ py: 2, px: 3 }}>
-              <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
-            </ListItem>
-            {children.map(({ id: childId, icon, active, path }) => (
-              <ListItem disablePadding key={childId}>
-                {/* TODO: should be active if the path matches its path */}
-                <ListItemButton
-                  selected={pathname === path}
-                  sx={item}
-                  onClick={() => router.push(path)}
-                >
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>{childId}</ListItemText>
-                </ListItemButton>
+        </ListItem> */}
+        {/* {status === "loading" && (
+          <ListItem sx={{ ...item, ...itemCategory }}>
+            <ListItemText>Loading ...</ListItemText>
+          </ListItem>
+        )} */}
+        {status === "unauthenticated" && (
+          <ListItem sx={{ ...item, ...itemCategory }}>
+            <ListItemText>Log in to see the menu</ListItemText>
+          </ListItem>
+        )}
+        {status === "loading" &&
+          categories.slice(0, 1).map(({ id, children }) => (
+            <Box key={id} sx={{ bgcolor: "#101F33" }}>
+              <ListItem sx={{ py: 2, px: 3 }}>
+                <ListItemText>
+                  <Skeleton
+                    animation="wave"
+                    variant="rectangular"
+                    sx={{ bgcolor: "grey.700" }}
+                  />
+                </ListItemText>
               </ListItem>
-            ))}
-            <Divider sx={{ mt: 2 }} />
-          </Box>
-        ))}
+              {children.map(({ id: childId, icon, active, path }) => (
+                <ListItem disablePadding key={childId}>
+                  {/* TODO: should be active if the path matches its path */}
+                  <ListItemButton
+                    selected={pathname === path}
+                    sx={item}
+                    onClick={() => router.push(path)}
+                  >
+                    <ListItemIcon>
+                      <Skeleton
+                        variant="circular"
+                        sx={{
+                          bgcolor: "grey.700",
+                        }}
+                      >
+                        {icon}
+                      </Skeleton>
+                    </ListItemIcon>
+                    <ListItemText>
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        sx={{ bgcolor: "grey.700" }}
+                      />
+                    </ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+              <Divider sx={{ mt: 2 }} />
+            </Box>
+          ))}
+        {status === "authenticated" &&
+          session &&
+          session.user &&
+          //@ts-ignore
+          session.user.role &&
+          categories.map(({ id, children }) => (
+            <>
+              {/* @ts-ignore */}
+              {session.user.role.toLowerCase() === id.toLowerCase() && (
+                <Box key={id} sx={{ bgcolor: "#101F33" }}>
+                  <ListItem sx={{ py: 2, px: 3 }}>
+                    <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
+                  </ListItem>
+                  {children.map(({ id: childId, icon, active, path }) => (
+                    <ListItem disablePadding key={childId}>
+                      {/* TODO: should be active if the path matches its path */}
+                      <ListItemButton
+                        selected={pathname === path}
+                        sx={item}
+                        onClick={() => router.push(path)}
+                      >
+                        <ListItemIcon>{icon}</ListItemIcon>
+                        <ListItemText>{childId}</ListItemText>
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                  <Divider sx={{ mt: 2 }} />
+                </Box>
+              )}
+            </>
+          ))}
       </List>
     </Drawer>
   );

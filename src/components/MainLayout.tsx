@@ -3,15 +3,12 @@ import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import Navigator from "./nav/Navigator";
-import Header from "./MainHeader";
 import CustomThemeProvider, { theme } from "./CustomThemeProvider";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import Navbar from "./nav/Navbar";
 import Copyright from "./Copyright";
 import MainSection from "./MainSection";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const drawerWidth = 256;
 
@@ -22,39 +19,60 @@ export default function MainLayout({
   children: React.ReactNode;
   session?: any;
 }) {
+  // TODO: provide redux here
+  return (
+    <SessionProvider session={session}>
+      <App> {children}</App>
+    </SessionProvider>
+  );
+}
+
+const App = ({ children }: { children: React.ReactNode }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+  const { data: session, status } = useSession();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  // TODO: provide redux here
+  // TODO: if not authenticated, redirect to login page
+  // if (status === "unauthenticated") return <div>Unauthenticated</div>;
+
   return (
-    <SessionProvider session={session}>
-      <CustomThemeProvider>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            minHeight: "100vh",
-            marginLeft: { sm: `${drawerWidth}px` },
-          }}
-        >
-          <CssBaseline />
-          {/* Navigation */}
-          <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-          {/* Main section of page */}
-          <MainSection handleDrawerToggle={handleDrawerToggle}>
-            {children}
-          </MainSection>
-          {/* Footer */}
-          <footer className="p-2 bg-sky-100">
-            <Copyright />
-          </footer>
-        </Box>
-      </CustomThemeProvider>
-    </SessionProvider>
+    <CustomThemeProvider>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          marginLeft: {
+            sm: `${drawerWidth}px`,
+          },
+        }}
+      >
+        {
+          <>
+            <CssBaseline />
+            {/* Navigation */}
+            <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+            {/* Main section of page */}
+            {status === "loading" ? (
+              <div className="flex items-center justify-center w-full h-full">
+                <CircularProgress />
+              </div>
+            ) : (
+              <MainSection handleDrawerToggle={handleDrawerToggle}>
+                {children}
+              </MainSection>
+            )}
+            {/* Footer */}
+            <footer className="p-2 bg-sky-100 mt-auto">
+              <Copyright />
+            </footer>
+          </>
+        }
+      </Box>
+    </CustomThemeProvider>
   );
-}
+};
