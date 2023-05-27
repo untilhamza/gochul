@@ -40,5 +40,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Next steps for this project
 
 - [x] Update loading states during authentication
-- [ ] Add functions to interact with data models in `lib/db`
-- [ ] Add required apis to `pages/api` using `next-connect`
+- [ ] Add api routes for interacting with data models
+-
