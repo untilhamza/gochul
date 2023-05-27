@@ -8,7 +8,6 @@ import { SessionProvider, useSession } from "next-auth/react";
 import Navbar from "./nav/Navbar";
 import Copyright from "./Copyright";
 import MainSection from "./MainSection";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const drawerWidth = 256;
 
@@ -30,7 +29,6 @@ export default function MainLayout({
 const App = ({ children }: { children: React.ReactNode }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
-  const { data: session, status } = useSession();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -57,15 +55,9 @@ const App = ({ children }: { children: React.ReactNode }) => {
             {/* Navigation */}
             <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
             {/* Main section of page */}
-            {status === "loading" ? (
-              <div className="flex items-center justify-center w-full h-full">
-                <CircularProgress />
-              </div>
-            ) : (
-              <MainSection handleDrawerToggle={handleDrawerToggle}>
-                {children}
-              </MainSection>
-            )}
+            <MainSection handleDrawerToggle={handleDrawerToggle}>
+              {children}
+            </MainSection>
             {/* Footer */}
             <footer className="p-2 bg-sky-100 mt-auto">
               <Copyright />

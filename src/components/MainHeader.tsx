@@ -16,6 +16,7 @@ import Tooltip from "@mui/material/Tooltip";
 import PageHeader from "./PageHeader";
 import { useSession } from "next-auth/react";
 import { signOut, signIn } from "next-auth/react";
+import Skeleton from "@mui/material/Skeleton";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -26,7 +27,7 @@ interface HeaderProps {
 export default function MainHeader(props: HeaderProps) {
   const { onDrawerToggle } = props;
   const [tabValue, setTabValue] = React.useState<number>(0);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const avatarUrl = session?.user?.image || "/images/face.png";
 
@@ -49,33 +50,54 @@ export default function MainHeader(props: HeaderProps) {
             </Grid>
             <Grid item xs />
             <Grid item>
-              <Link
-                href="https://www.yoidoenglishministry.org/"
-                target="_blank"
-                className="text-white hover:text-blue-100"
-              >
-                Go to YEM
-              </Link>
+              {status === "loading" ? (
+                <Skeleton
+                  variant="text"
+                  sx={{ fontSize: "1rem", width: "5rem" }}
+                />
+              ) : (
+                <Link
+                  href="https://www.yoidoenglishministry.org/"
+                  target="_blank"
+                  className="text-white hover:text-blue-100"
+                >
+                  Go to YEM
+                </Link>
+              )}
             </Grid>
             <Grid item>
-              <Tooltip title="Alerts • No alerts">
-                <IconButton color="inherit">
-                  <NotificationsIcon />
-                </IconButton>
-              </Tooltip>
+              {status === "loading" ? (
+                <Skeleton variant="rectangular" width={20} height={20} />
+              ) : (
+                <Tooltip title="Alerts • No alerts">
+                  <IconButton color="inherit">
+                    <NotificationsIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
             </Grid>
             <Grid item>
               <IconButton color="inherit" sx={{ p: 0.5 }}>
-                <Avatar src={avatarUrl} alt="My Avatar" />
+                {status === "loading" ? (
+                  <Skeleton variant="circular" width={30} height={30} />
+                ) : (
+                  <Avatar src={avatarUrl} alt="My Avatar" />
+                )}
               </IconButton>
             </Grid>
             <Grid item>
-              {session && (
+              {status === "loading" && (
+                <Skeleton
+                  variant="text"
+                  sx={{ fontSize: "1rem", width: "5rem" }}
+                />
+              )}
+              {status === "authenticated" && (
                 <Button color="inherit" onClick={() => signOut()}>
                   Logout
                 </Button>
               )}
-              {!session && (
+              {status === "unauthenticated" && (
                 <Button color="inherit" onClick={() => signIn()}>
                   sign in
                 </Button>
