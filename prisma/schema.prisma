@@ -79,6 +79,7 @@ model Group {
   id         String     @id @default(auto()) @map("_id") @db.ObjectId
   districtId String     @db.ObjectId
   leaderId   String     @db.ObjectId
+  active     Boolean    @default(true)
   district   District   @relation(fields: [districtId], references: [id])
   leader     GochulUser @relation(fields: [leaderId], references: [id])
   Member     Member[]
@@ -87,8 +88,8 @@ model Group {
 
 // each group belong to a district 
 model District {
-  id    String         @id @default(auto()) @map("_id") @db.ObjectId
-  name  Group_District @unique
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  name  String  @unique
   Group Group[]
 }
 
@@ -123,11 +124,4 @@ enum Role {
   ADMIN
   LEADER
   USER
-}
-
-// possible group districts
-enum Group_District {
-  FAMILY
-  COLLEGE
-  WORKING_PROFESSIONAL
 }
