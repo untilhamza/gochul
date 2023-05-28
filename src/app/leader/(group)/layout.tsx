@@ -7,7 +7,7 @@ const groupTabs: PageTab[] = [
     path: "leader/group",
   },
   {
-    label: "Edit Group",
+    label: "Create Group",
     path: "leader/new-group",
   },
 ];
