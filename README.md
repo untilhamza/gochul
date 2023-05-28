@@ -64,7 +64,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - [ ] The leader can add members to a group
 - [ ] The leader can delete members from a group
-- [] The leader can update the details of a member
+- [ ] The leader can update the details of a member
 - [ ] The leader can view the details of a member
 - [ ] The leader can view the details of all members in their group
 
