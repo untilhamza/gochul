@@ -71,6 +71,7 @@ export const authOptions: NextAuthOptions = {
         token = {
           ...token,
           role: gochulUser?.role,
+          id: gochulUser?.id,
         };
       }
       return token;
@@ -85,10 +86,11 @@ export const authOptions: NextAuthOptions = {
         session.user = {
           ...session.user,
           //@ts-ignore
-          role: gochulUser?.role,
+          role: gochulUser.role,
           firstName: gochulUser?.firstName,
           lastName: gochulUser?.lastName,
           picture: gochulUser?.picture,
+          id: gochulUser?.id,
         };
       }
       return session;
@@ -100,3 +102,18 @@ export const authOptions: NextAuthOptions = {
   },
 };
 export default NextAuth(authOptions);
+
+interface ISession extends Session {
+  user?: {
+    role: string;
+    firstName: string;
+    lastName: string;
+    picture: string;
+    id: string;
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  };
+}
+
+export type IUserSession = ISession | null;
