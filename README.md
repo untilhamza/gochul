@@ -54,11 +54,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - [x] The leader can only create a new group if they don't have an active group
 - [x] Frontend should allow them to create a group, deactivate a group
 
+### Gochul User model
+
+- [ ] The User can view there personal details
+- [ ] The user can update their personal details
+- [ ] The user can delete their account (soft delete, to be implemented later)
+
 ### Member model
 
-- [x] The leader can add members to a group
-- [x] The leader can delete members from a group
-- [x] The leader can update the details of a member
+- [ ] The leader can add members to a group
+- [ ] The leader can delete members from a group
+- [] The leader can update the details of a member
 - [ ] The leader can view the details of a member
 - [ ] The leader can view the details of all members in their group
 
