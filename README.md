@@ -39,6 +39,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Next steps for this project
 
+- [x] Implement initial frontend design
 - [x] Update loading states during authentication
 - [ ] Add api routes for interacting with data models `(in progress)`
 
