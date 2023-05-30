@@ -51,24 +51,6 @@ const categories = [
     id: "User",
     children: [
       {
-        id: "Reports",
-        path: "/leader/reports",
-        icon: <SummarizeIcon />,
-        active: true,
-      },
-      {
-        id: "Members",
-        icon: <PeopleIcon />,
-        path: "/leader/members",
-        active: false,
-      },
-      {
-        id: "Group Settings",
-        icon: <GroupsIcon />,
-        path: "/leader/group",
-        active: false,
-      },
-      {
         id: "Account Settings",
         icon: <SettingsIcon />,
         path: "/leader/account",
