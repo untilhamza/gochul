@@ -41,7 +41,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - [x] Implement initial frontend design
 - [x] Update loading states during authentication
+- [ ] Correct auth flow and check for auth on page load correctly in next auth
 - [ ] Add api routes for interacting with data models `(in progress)`
+- [ ] Remove custom types and use prisma types
+
+## Authentication
+
+- [] Refer to this youtube video for authentication [youtube](https://youtu.be/Eh3EpwqT4cM)
 
 ### District model
 
@@ -62,11 +68,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ### Member model
 
-- [ ] The leader can add members to a group
-- [ ] The leader can delete members from a group
-- [ ] The leader can update the details of a member
-- [ ] The leader can view the details of a member
-- [ ] The leader can view the details of all members in their group
+- [x] The leader can add members to a group
+- [x] The leader can delete members from a group
+- [x] The leader can update the details of a member
+- [ ] The leader can view the details of a single member
+- [x] The leader can view the details of all members in their group
 
 ## Next.js and Prisma examples
 
