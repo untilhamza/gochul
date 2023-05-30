@@ -195,16 +195,9 @@ const LeaderForm = (): JSX.Element => {
               <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                 {isEditMode ? (
                   <div className="flex gap-3 justify-center md:justify-end">
-                    {" "}
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                    >
-                      Save
-                    </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md bg-red-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+                      className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded w-full md:w-auto"
                       onClick={(e) => {
                         e.preventDefault();
                         setIsEditMode(false);
@@ -212,13 +205,19 @@ const LeaderForm = (): JSX.Element => {
                     >
                       Cancel
                     </button>
+                    <button
+                      type="submit"
+                      className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded w-full md:w-auto"
+                    >
+                      Save
+                    </button>
                   </div>
                 ) : (
                   <div className="flex justify-center md:justify-end">
                     {" "}
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                      className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded w-full md:w-auto"
                       onClick={(e) => {
                         e.preventDefault();
                         setIsEditMode(true);

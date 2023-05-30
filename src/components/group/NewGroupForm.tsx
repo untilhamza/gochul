@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { District } from "@prisma/client";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const FormSchema = yup.object().shape({
   district: yup.string().required("* District is required"),
@@ -89,7 +90,7 @@ const NewGroupForm = () => {
           <form onSubmit={formik.handleSubmit}>
             <div className="overflow-hidden shadow sm:rounded-md">
               <div className="bg-white px-4 py-5 sm:p-6 md:h-[230px]">
-                <div className="grid grid-cols-6 gap-6">
+                <div className="grid grid-cols-6 gap-6 mb-8">
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="district"
@@ -120,19 +121,19 @@ const NewGroupForm = () => {
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 flex justify-end gap-2 mt-5">
-                <button
-                  type="submit"
-                  className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                >
-                  Create
-                </button>
-                <button
+              <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 flex justify-end gap-2 mt-10 md:mt-8">
+                <Link
                   type="button"
-                  className="inline-flex justify-center rounded-md bg-red-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
-                  onClick={() => router.push("leader/members")}
+                  className="inline-flex justify-center rounded-md bg-red-500 py-2 px-3 font-semibold text-white hover:bg-red-600 w-full md:w-auto"
+                  href="/leader/group"
                 >
                   Cancel
+                </Link>
+                <button
+                  type="submit"
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 rounded-md inline-flex justify-center w-full md:w-auto"
+                >
+                  Create
                 </button>
               </div>
             </div>

@@ -95,28 +95,31 @@ model District {
 
 // a member of a group is not really a signed in user
 model Member {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   firstName  String
   lastName   String?
   country    String?
-  occupation String?
-  groupId    String  @db.ObjectId
-  Group      Group   @relation(fields: [groupId], references: [id])
-  Report     Report? @relation(fields: [reportId], references: [id])
-  reportId   String? @db.ObjectId
+  groupId    String   @db.ObjectId
+  reportIds  String[] @db.ObjectId
+  Group      Group    @relation(fields: [groupId], references: [id])
+  Report     Report[] @relation(fields: [reportIds], references: [id])
+  isDeleted Boolean  @default(false)
+
 }
 
 model Report {
   id               String     @id @default(auto()) @map("_id") @db.ObjectId
   groupId          String     @db.ObjectId
   leaderId         String     @db.ObjectId
-  membersPresent   Member[]
   eventsActivities String
   online           Boolean
   prayerRequests   String
   submissionDate   DateTime
+  memberPresentIds String[]   @db.ObjectId
   Group            Group      @relation(fields: [groupId], references: [id])
   leader           GochulUser @relation(fields: [leaderId], references: [id])
+  Member           Member[]   @relation(fields: [memberPresentIds], references: [id])
+  
 }
 
 // possible roles for users

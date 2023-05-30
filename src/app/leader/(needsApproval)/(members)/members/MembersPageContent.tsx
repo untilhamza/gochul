@@ -1,22 +1,63 @@
 "use client";
+//TODO: turn it into a server component to fetch the group data and the members data before rendering the page
+//TODO: the data will be given to the memebers page as props
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import MemberList from "../../../../components/members/MemberList";
+import MemberList from "../../../../../components/members/MemberList";
 import { useRouter } from "next/navigation";
+import useSWR, { Fetcher, useSWRConfig } from "swr";
+import { useSession } from "next-auth/react";
+import { IGroupData } from "../../(group)/group/page";
+import ErrorPageDetails from "@/components/error/ErrorPageDetails";
 
-const MembersPage = () => {
+//@ts-ignore
+const fetchMemberData: Fetcher = (...args) =>
+  //@ts-ignore
+  fetch(...args).then((res) => res.json());
+
+const MembersPageContent = ({ groupId }: { groupId: string }) => {
   const router = useRouter();
   const [searchMemberName, setSearchMemberName] = React.useState<string>("");
+  const { data: session, status } = useSession({
+    required: true,
+  });
+
+  //@ts-ignore
+  const leaderId = session?.user?.id;
+
+  console.log("leaderId", leaderId);
+  console.log("groupId", groupId);
+
+  const {
+    data: membersData,
+    error,
+    isLoading,
+  } = useSWR(
+    `/api/leader/${leaderId}/group/${groupId}/member`,
+    fetchMemberData
+  ) as {
+    data: any[];
+    error: Error;
+    isLoading: boolean;
+  };
+
+  if (isLoading) return <div>loading...</div>;
+
+  if (error) {
+    return <ErrorPageDetails />;
+  }
+
+  console.log("members data", membersData);
+
   return (
     <Paper sx={{ maxWidth: 936, margin: "auto", overflow: "hidden" }}>
       <AppBar
@@ -44,12 +85,13 @@ const MembersPage = () => {
               />
             </Grid>
             <Grid item>
-              <button
-                className="ms-1 inline-flex justify-center rounded-md ms-auto bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              {/* TODO: you can put this at the bottom */}
+              {/* <button
+                className="inline-flex justify-center rounded-md ms-auto bg-indigo-500 py-2 px-3 font-semibold text-white shadow-sm hover:bg-indigo-600 "
                 onClick={() => router.push("leader/new-member")}
               >
                 Add Member
-              </button>
+              </button> */}
               <Tooltip title="Reload">
                 <IconButton
                   onClick={() => {
@@ -64,7 +106,12 @@ const MembersPage = () => {
           </Grid>
         </Toolbar>
       </AppBar>
-      <MemberList searchMemberName={searchMemberName} />
+      <MemberList
+        searchMemberName={searchMemberName}
+        members={membersData}
+        leaderId={leaderId}
+        groupId={groupId}
+      />
       <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
         You can add new members in the new-members tab.
       </Typography>
@@ -72,4 +119,4 @@ const MembersPage = () => {
   );
 };
 
-export default MembersPage;
+export default MembersPageContent;
