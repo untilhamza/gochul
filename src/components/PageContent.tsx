@@ -10,7 +10,7 @@ export default function PageContent({
   children: React.ReactNode;
   pageName: string;
   tabs: PageTab[];
-  showTabs: boolean;
+  showTabs?: boolean;
 }) {
   return (
     <>
