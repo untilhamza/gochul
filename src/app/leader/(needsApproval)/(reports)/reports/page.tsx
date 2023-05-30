@@ -12,8 +12,8 @@ import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { REPORTS } from "@/shared/data/reports.data";
-import ReportView from "../../../../components/reports/ReportView";
-import ReportsList from "../../../../components/reports/ReportsList";
+import ReportView from "../../../../../components/reports/ReportView";
+import ReportsList from "../../../../../components/reports/ReportsList";
 
 export default function Page() {
   //TODO: fetch reports from the database for given group
