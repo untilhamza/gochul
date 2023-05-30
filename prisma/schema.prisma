@@ -99,12 +99,12 @@ model Member {
   firstName  String
   lastName   String?
   country    String?
-  occupation String?
   groupId    String   @db.ObjectId
   reportIds  String[] @db.ObjectId
   Group      Group    @relation(fields: [groupId], references: [id])
   Report     Report[] @relation(fields: [reportIds], references: [id])
- 
+  isDeleted Boolean  @default(false)
+
 }
 
 model Report {
