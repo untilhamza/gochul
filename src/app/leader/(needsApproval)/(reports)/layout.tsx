@@ -1,6 +1,6 @@
 import PageContent from "@/components/PageContent";
 import prisma from "@/lib/prisma";
-import { IUserSession } from "@/pages/api/auth/[...nextauth]";
+import { IUserSession } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import GroupRequired from "@/components/group/GroupRequired";
 

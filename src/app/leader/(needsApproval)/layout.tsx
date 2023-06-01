@@ -1,4 +1,4 @@
-import { IUserSession } from "@/pages/api/auth/[...nextauth]";
+import { IUserSession } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import ApprovalRequiredPage from "@/components/approval/ApprovalRequired";
 

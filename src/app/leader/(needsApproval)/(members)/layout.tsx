@@ -1,10 +1,10 @@
 import PageContent from "@/components/PageContent";
-import { IUserSession } from "@/pages/api/auth/[...nextauth]";
+import { IUserSession } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import prisma from "@/lib/prisma";
 import GroupRequired from "@/components/group/GroupRequired";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const membersPageTabs: PageTab[] = [
   {

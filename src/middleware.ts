@@ -11,11 +11,13 @@ export default withAuth(
       req.nextauth.token?.role !== "ADMIN" &&
       req.nextUrl.pathname.startsWith("/admin")
     ) {
+      //@ts-ignore
       return NextResponse.redirect(new URL("/", req.url));
     } else if (
       req.nextauth.token?.role !== "LEADER" &&
       req.nextUrl.pathname.startsWith("/leader")
     ) {
+      //@ts-ignore
       return NextResponse.redirect(new URL("/", req.url));
     }
   },

@@ -1,6 +1,6 @@
 import NewMemberForm from "@/components/members/NewMemberForm";
 import prisma from "@/lib/prisma";
-import { IUserSession } from "@/pages/api/auth/[...nextauth]";
+import { IUserSession } from "@/app/api/auth/[...nextauth]/route";
 import { Member } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import Link from "next/link";

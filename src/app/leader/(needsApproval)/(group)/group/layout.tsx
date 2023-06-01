@@ -2,7 +2,7 @@ import * as React from "react";
 import PageContent from "@/components/PageContent";
 import GroupRequired from "@/components/group/GroupRequired";
 import { getServerSession } from "next-auth";
-import { IUserSession } from "@/pages/api/auth/[...nextauth]";
+import { IUserSession } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 

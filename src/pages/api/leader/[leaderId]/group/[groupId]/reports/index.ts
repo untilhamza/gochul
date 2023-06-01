@@ -6,7 +6,7 @@
 import prisma from "@/lib/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { isAdminOrLeader } from "@/utils/apiUtils";
 import { Report, Member } from "@prisma/client";
 
