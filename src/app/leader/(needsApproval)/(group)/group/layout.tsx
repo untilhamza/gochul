@@ -17,7 +17,7 @@ export default async function Content({
 
   const group = await prisma.group.findFirst({
     where: {
-      leaderId: userId + "k",
+      leaderId: userId,
       active: true,
     },
   });
