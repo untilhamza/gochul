@@ -52,27 +52,50 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### District model
 
 - [x] The districts should be set from the frontend by the admin and not hardcoded in schema
--
-
-### Group model
-
-- [x] The leader can delete / deactivate their group
-- [x] The leader can only create a new group if they don't have an active group
-- [x] Frontend should allow them to create a group, deactivate a group
 
 ### Gochul User model
 
 - [ ] The User can view there personal details
 - [ ] The user can update their personal details
 - [ ] The user can delete their account (soft delete, to be implemented later)
+-
 
-### Member model
+## Leader features
+
+### Leader on Group model
+
+- [x] The leader can delete / deactivate their group
+- [x] The leader can only create a new group if they don't have an active group
+- [x] Frontend should allow them to create a group, deactivate a group
+
+### Leader on Member model
 
 - [x] The leader can add members to a group
 - [x] The leader can delete members from a group
 - [x] The leader can update the details of a member
 - [ ] The leader can view the details of a single member
 - [x] The leader can view the details of all members in their group
+
+### Leader on reports model
+
+- [x] The leader can create a report for their group meeting
+- [ ] The leader can view all reports for their group meeting
+- [ ] The leader can view a single report for their group meeting
+- [ ] The leader can update a report for their group meeting
+- [ ] The leader can delete a report for their group meeting
+- [ ] The leader can view all reports for their group
+
+## Admin features
+
+### Admin on Group model
+
+### Admin on Member model
+
+### Admin on reports model
+
+### Admin on District model
+
+### Admin on Gochul User model
 
 ## Next.js and Prisma examples
 

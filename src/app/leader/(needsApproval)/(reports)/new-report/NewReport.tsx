@@ -2,39 +2,61 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
+import { Report } from "@prisma/client";
+import useSWR, { useSWRConfig } from "swr";
+import { generalFetcher } from "@/shared/utils";
+import { Formik } from "formik";
+import { Member } from "@prisma/client";
 
-const SAMPLE_MEMBERS: ReportMember[] = [
-  { firstName: "Leader", id: "1" },
-  { firstName: "Apple", id: "2" },
-  { firstName: "Pear", id: "3" },
-  { firstName: "Orange", id: "4" },
-  { firstName: "Banana", id: "5" },
-  { firstName: "Mango", id: "6" },
-  { firstName: "Pineapple", id: "7" },
-  { firstName: "Strawberry", id: "8" },
-];
+// const SAMPLE_MEMBERS: Member[] = [
+//   { firstName: "Leader", id: "1" },
+//   { firstName: "Apple", id: "2" },
+//   { firstName: "Pear", id: "3" },
+//   { firstName: "Orange", id: "4" },
+//   { firstName: "Banana", id: "5" },
+//   { firstName: "Mango", id: "6" },
+//   { firstName: "Pineapple", id: "7" },
+//   { firstName: "Strawberry", id: "8" },
+// ];
 
-const DEFAULT_DATA = {
-  membersPresent: [],
-  eventsActivities: "",
-  online: null,
-  prayerRequests: "",
-};
+// const DEFAULT_DATA: Report = {
+//   membersPresent: [],
+//   eventsActivities: "",
+//   online: false,
+//   prayerRequests: "",
+// };
 
-const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
-  formData = DEFAULT_DATA,
+const ReportForm = ({
   isEditing = false,
+  leaderId,
+  groupId,
+  members,
+}: {
+  formData?: Report;
+  isEditing?: boolean;
+  leaderId: string;
+  groupId: string;
+  members: Member[];
 }) => {
-  const [membersPresent, setMembersPresent] = useState<ReportMember[]>(
-    formData.membersPresent
-  );
-  const [eventsActivities, setEventsActivities] = useState<string>(
-    formData.eventsActivities
-  );
-  const [online, setOnline] = useState<boolean | null>(formData.online);
-  const [prayerRequests, setPrayerRequests] = useState<string>(
-    formData.prayerRequests
-  );
+  const [membersPresent, setMembersPresent] = useState<Member[]>(members || []);
+  const [eventsActivities, setEventsActivities] = useState<string>();
+  const [online, setOnline] = useState<boolean | null>();
+  const [prayerRequests, setPrayerRequests] = useState<string>();
+
+  const { mutate } = useSWRConfig();
+
+  console.log("members", members);
+  console.log("leaderId", leaderId);
+  console.log("groupId", groupId);
+
+  const { data, error, isLoading } = useSWR(
+    `/api/leader/${leaderId}/group/${groupId}/member`,
+    generalFetcher
+  ) as {
+    data: any[];
+    error: Error;
+    isLoading: boolean;
+  };
 
   const handleInputPrayerRequests = (e: any) => {
     setPrayerRequests(e.target.value);
@@ -50,7 +72,7 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
   };
 
   //TODO: use the incoming data instead
-  const options = SAMPLE_MEMBERS.map((member) => {
+  const options = [].map((member: any) => {
     return {
       label: member.firstName,
       value: member.id,
@@ -77,8 +99,8 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
           <div className="col-span-2 text-gray-800 font-semibold">
             Members Present :
           </div>
-          <div className="col-span-6 md:grid grid-cols-3 gap-4">
-            {options.map((option) => {
+          <div className="col-span-6 md:grid md:grid-cols-3 gap-4">
+            {/* {options.map((option) => {
               return (
                 <div
                   key={option.value}
@@ -116,7 +138,7 @@ const ReportForm: React.FC<{ formData?: Report; isEditing?: boolean }> = ({
                   />
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
 
