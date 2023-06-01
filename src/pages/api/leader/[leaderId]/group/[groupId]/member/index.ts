@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Member } from "@prisma/client";
 
 // GET api/leader/[leaderId]/group/[groupId]/member/

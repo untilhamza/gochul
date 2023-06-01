@@ -101,7 +101,8 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
 };
-export default NextAuth(authOptions);
+
+const handler = NextAuth(authOptions);
 
 interface ISession extends Session {
   user?: {
@@ -117,3 +118,5 @@ interface ISession extends Session {
 }
 
 export type IUserSession = ISession | null;
+
+export { handler as GET, handler as POST };

@@ -2,7 +2,7 @@ import NewGroupForm from "@/components/group/NewGroupForm";
 import React from "react";
 import { getServerSession } from "next-auth";
 import prisma from "@/lib/prisma";
-import { IUserSession } from "@/pages/api/auth/[...nextauth]";
+import { IUserSession } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import GroupAlreadyCreated from "@/components/group/GroupAlreadyCreated";

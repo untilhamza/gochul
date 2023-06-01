@@ -1,4 +1,4 @@
-import { authOptions, IUserSession } from "@/pages/api/auth/[...nextauth]";
+import { authOptions, IUserSession } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import prisma from "@/lib/prisma";
 import MembersPageContent from "./MembersPageContent";
